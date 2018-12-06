@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_height">48dp</dimen>
+    <dimen name="home_func_title_text_size_18sp">18sp</dimen>
+    <dimen name="home_article_item_content_text_size">16sp</dimen>
+    <dimen name="search_hot_key_tip_text_size_16sp">16sp</dimen>
+    <dimen name="text_size_18sp">18sp</dimen>
+    <dimen name="dialog_sheet_top_radius">16dp</dimen>
+    <dimen name="dp200">200dp</dimen>
+</resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    app:cardElevation="10dp"
+    android:id="@+id/item_layout">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--话题文本内容-->
+        <LinearLayout
+            android:id="@+id/circle_home_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <!--标题-->
+            <TextView
+                android:id="@+id/card_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:ellipsize="end"
+                android:text=""
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
+                android:textColor="#333333"/>
+
+        </LinearLayout>
+
+        <!--话题图片内容-->
+        <FrameLayout
+            android:id="@+id/circle_home_image_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/circle_topic_iv"
+                android:layout_width="match_parent"
+                android:layout_height="228dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                />
+
+
+            <!--话题信息-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="15dp"
+                android:layout_gravity="bottom">
+                <include layout="@layout/user_info_layout" />
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

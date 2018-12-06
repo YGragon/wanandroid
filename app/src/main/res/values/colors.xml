@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="search_bg_color">#80FFFFFF</color>
+    <color name="home_func_title_bg_color">#303F9F</color>
+    <color name="guide_bg_color_9e4891ff">#9e4891ff</color>
+    <color name="dialog_sheet_record_bg">#FFFFFF</color>
+    <color name="dialog_bg_translate">#00000000</color>
+
+</resources>

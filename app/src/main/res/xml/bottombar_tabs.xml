@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <!--icon="@drawable/ic_favorites"-->
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/home_selected_icon"
+        title="@string/home" />
+    <tab
+        id="@+id/tab_welfare"
+        icon="@drawable/welfare_selected_icon"
+        title="@string/welfare" />
+    <!--<tab-->
+        <!--id="@+id/tab_project"-->
+        <!--title="@string/project" />-->
+    <tab
+        id="@+id/tab_me"
+        icon="@drawable/me_selected_icon"
+        title="@string/me" />
+</tabs>
