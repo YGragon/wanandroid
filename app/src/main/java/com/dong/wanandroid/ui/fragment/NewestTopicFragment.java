@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dong.wanandroid.R;
-import com.dong.wanandroid.flow.FlowGankModel;
+import com.dong.wanandroid.model.flow.FlowGankModel;
 import com.dong.wanandroid.constant.ApiConstant;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;

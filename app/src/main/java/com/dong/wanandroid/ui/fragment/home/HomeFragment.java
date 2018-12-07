@@ -18,11 +18,10 @@ import com.dong.wanandroid.R;
 import com.dong.wanandroid.model.home.HomeArticleModel;
 import com.dong.wanandroid.presenter.home.HomeIPresenter;
 import com.dong.wanandroid.presenter.home.HomeIPresenterCompl;
-import com.dong.wanandroid.tool.GlideImageLoader;
 import com.dong.wanandroid.ui.adapter.HomeArticleAdapter;
 import com.dong.wanandroid.ui.adapter.HomeFuncGridViewAdapter;
-import com.dong.wanandroid.util.LogUtils;
 import com.dong.wanandroid.util.ReplaceClickUtils;
+import com.dong.wanandroid.util.tool.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -146,7 +145,6 @@ public class HomeFragment extends Fragment implements HomeIView{
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 if (!ReplaceClickUtils.isFastClick()){
-                    LogUtils.eTag("222","存储数据");
                     homeIPresenter.saveReadRecordToDb(homeArticleModels.get(position));
                     homeIPresenter.toBrowserAc(getActivity(),
                             homeArticleModels.get(position).getLink(),

@@ -5,11 +5,12 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
+import com.dong.wanandroid.base.BaseActivity;
 import com.dong.wanandroid.ui.fragment.home.HomeFragment;
 import com.dong.wanandroid.ui.fragment.me.MeFragment;
+import com.dong.wanandroid.ui.fragment.project.ProjectFragment;
 import com.dong.wanandroid.ui.fragment.welfare.WelfareFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -17,7 +18,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     @BindView(R.id.contentContainer)
     FrameLayout contentContainer;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     //之前显示的fragment
     private HomeFragment homeFragment;
     private WelfareFragment mWelfareFragment;
-//    private ProjectFragment projectFragment;
+    private ProjectFragment projectFragment;
     private MeFragment meFragment;
     private Fragment mContent;
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         homeFragment = HomeFragment.getInstance();
         mWelfareFragment = WelfareFragment.getInstance();
-//        projectFragment = ProjectFragment.getInstance();
+        projectFragment = ProjectFragment.getInstance();
         meFragment = MeFragment.getInstance();
         setDefaultFragment(homeFragment);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -56,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.tab_welfare:
                         switchContent(mWelfareFragment);
                         break;
-//                    case R.id.tab_project:
-//                        switchContent(projectFragment);
-//                        break;
+                    case R.id.tab_gank:
+                        switchContent(projectFragment);
+                        break;
                     case R.id.tab_me:
                         switchContent(meFragment);
                         break;

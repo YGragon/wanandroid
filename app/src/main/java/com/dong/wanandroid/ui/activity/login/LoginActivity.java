@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
 import com.dong.wanandroid.db.DBHelper;
-import com.dong.wanandroid.event_bus_model.UserEvent;
+import com.dong.wanandroid.model.event_bus_model.UserEvent;
 import com.dong.wanandroid.model.user.UserModel;
 import com.dong.wanandroid.presenter.login.IPresenter;
 import com.dong.wanandroid.presenter.login.IpresenterCompl;

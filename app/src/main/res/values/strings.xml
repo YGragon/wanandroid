@@ -2,7 +2,7 @@
     <string name="app_name">WanAndroid</string>
     <string name="home">首页</string>
     <string name="welfare">福利</string>
-    <string name="project">项目</string>
+    <string name="gank">干货</string>
     <string name="me">我的</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_hint_txt">多个关键字搜索，空格分开</string>

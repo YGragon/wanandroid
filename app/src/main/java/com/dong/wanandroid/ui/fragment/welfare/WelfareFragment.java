@@ -16,7 +16,7 @@ import com.dong.wanandroid.constant.ApiParamConstant;
 import com.dong.wanandroid.model.welfare.WelfareModel;
 import com.dong.wanandroid.presenter.welfare.WelfareIpresenter;
 import com.dong.wanandroid.presenter.welfare.WelfareIpresenterCompl;
-import com.dong.wanandroid.tool.GridSpacingItemDecoration;
+import com.dong.wanandroid.util.tool.GridSpacingItemDecoration;
 import com.dong.wanandroid.ui.adapter.WelfareAdapter;
 import com.dong.wanandroid.util.ReplaceClickUtils;
 import com.scwang.smartrefresh.layout.util.DensityUtil;

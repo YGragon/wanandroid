@@ -13,7 +13,7 @@ import com.dong.wanandroid.model.user.UserModel;
 import java.util.List;
 
 /**
- * Created by macmini002 on 18/6/1.
+ * 数据库操作类
  */
 
 public class DBHelper {

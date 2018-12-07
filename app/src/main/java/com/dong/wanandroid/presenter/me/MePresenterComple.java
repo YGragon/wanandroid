@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.dong.wanandroid.db.DBHelper;
-import com.dong.wanandroid.event_bus_model.UserEvent;
+import com.dong.wanandroid.model.event_bus_model.UserEvent;
 import com.dong.wanandroid.ui.activity.login.LoginActivity;
 import com.dong.wanandroid.model.user.UserModel;
 import com.dong.wanandroid.ui.fragment.me.MeIView;

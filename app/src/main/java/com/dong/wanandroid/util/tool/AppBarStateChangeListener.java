@@ -1,4 +1,4 @@
-package com.dong.wanandroid.tool;
+package com.dong.wanandroid.util.tool;
 
 import android.support.design.widget.AppBarLayout;
 

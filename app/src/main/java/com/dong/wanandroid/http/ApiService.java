@@ -1,7 +1,7 @@
 package com.dong.wanandroid.http;
 
 import com.dong.wanandroid.model.banner.BannerList;
-import com.dong.wanandroid.flow.FlowGankModel;
+import com.dong.wanandroid.model.flow.FlowGankModel;
 import com.dong.wanandroid.model.home.HomeArticleList;
 import com.dong.wanandroid.model.user.UserListModel;
 import com.dong.wanandroid.model.welfare.WelfareList;

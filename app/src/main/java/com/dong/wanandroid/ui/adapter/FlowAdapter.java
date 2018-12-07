@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.dong.wanandroid.R;
-import com.dong.wanandroid.flow.FlowGankModel;
+import com.dong.wanandroid.model.flow.FlowGankModel;
 
 import java.util.List;
 

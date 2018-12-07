@@ -1,8 +1,8 @@
 package com.dong.wanandroid.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 
 import com.dong.wanandroid.model.event_bus_model.Event;
 import com.dong.wanandroid.util.EventBusUtil;
@@ -10,17 +10,14 @@ import com.dong.wanandroid.util.EventBusUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
-
 /**
- * Created by Administrator on 2018/3/10.
+ * Created by Administrator on 2018/12/6.
  */
 
-public class BaseActivity extends SwipeBackActivity {
-
+public class BaseFragment extends Fragment {
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if (isRegisterEventBus()) {
             EventBusUtil.register(this);
         }

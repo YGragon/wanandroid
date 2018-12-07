@@ -1,4 +1,4 @@
-package com.dong.wanandroid.event_bus_model;
+package com.dong.wanandroid.model.event_bus_model;
 
 import com.dong.wanandroid.model.user.UserModel;
 

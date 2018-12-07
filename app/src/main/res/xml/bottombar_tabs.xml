@@ -3,17 +3,18 @@
     <!--icon="@drawable/ic_favorites"-->
     <tab
         id="@+id/tab_home"
-        icon="@drawable/home_selected_icon"
+        icon="@drawable/bar_selected_icon_home"
         title="@string/home" />
     <tab
         id="@+id/tab_welfare"
-        icon="@drawable/welfare_selected_icon"
+        icon="@drawable/bar_selected_icon_welfare"
         title="@string/welfare" />
-    <!--<tab-->
-        <!--id="@+id/tab_project"-->
-        <!--title="@string/project" />-->
+    <tab
+        id="@+id/tab_gank"
+        icon="@drawable/bar_selected_icon_gank"
+        title="@string/gank" />
     <tab
         id="@+id/tab_me"
-        icon="@drawable/me_selected_icon"
+        icon="@drawable/bar_selected_icon_me"
         title="@string/me" />
 </tabs>
