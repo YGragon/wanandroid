@@ -1,4 +1,4 @@
-package com.dong.wanandroid.constant;
+package com.dong.wanandroid.model.http;
 
 /**
  * Created by Administrator on 2017/9/17.
