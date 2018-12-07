@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.flow;
+package com.dong.wanandroid.data.flow;
 
 import java.util.List;
 

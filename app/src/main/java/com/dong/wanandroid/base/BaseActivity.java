@@ -2,7 +2,7 @@ package com.dong.wanandroid.base;
 
 import android.os.Bundle;
 
-import com.dong.wanandroid.model.event_bus_model.Event;
+import com.dong.wanandroid.data.event_bus_model.Event;
 import com.dong.wanandroid.util.third_lib.EventBusUtil;
 
 import org.greenrobot.eventbus.Subscribe;

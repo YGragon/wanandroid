@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.user;
+package com.dong.wanandroid.data.user;
 
 /**
  * Created by macmini002 on 18/6/4.

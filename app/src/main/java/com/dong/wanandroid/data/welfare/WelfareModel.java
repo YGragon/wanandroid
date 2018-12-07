@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.welfare;
+package com.dong.wanandroid.data.welfare;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

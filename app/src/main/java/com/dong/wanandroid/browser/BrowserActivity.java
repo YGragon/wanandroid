@@ -8,8 +8,8 @@ import android.widget.Toast;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.constant.ApiConstant;
-import com.dong.wanandroid.model.home.HomeArticleBean;
+import com.dong.wanandroid.http.ApiConstant;
+import com.dong.wanandroid.data.home.HomeArticleBean;
 import com.dong.wanandroid.collect.CollectIpresenterCompl;
 import com.dong.wanandroid.collect.CollectIView;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;

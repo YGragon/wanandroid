@@ -1,14 +1,14 @@
-package com.dong.wanandroid.model.db;
+package com.dong.wanandroid.data.db;
 
 import com.dong.wanandroid.BaseApplication;
-import com.dong.wanandroid.model.banner.Banner;
+import com.dong.wanandroid.data.banner.Banner;
 import com.dong.wanandroid.greendao.gen.BannerDao;
 import com.dong.wanandroid.greendao.gen.HomeArticleModelDao;
 import com.dong.wanandroid.greendao.gen.ReadRecordModelDao;
 import com.dong.wanandroid.greendao.gen.UserModelDao;
-import com.dong.wanandroid.model.home.HomeArticleModel;
-import com.dong.wanandroid.model.read_record.ReadRecordModel;
-import com.dong.wanandroid.model.user.UserModel;
+import com.dong.wanandroid.data.home.HomeArticleModel;
+import com.dong.wanandroid.data.read_record.ReadRecordModel;
+import com.dong.wanandroid.data.user.UserModel;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.model.user.UserModel;
+import com.dong.wanandroid.data.user.UserModel;
 import com.dong.wanandroid.login.LoginActivity;
 
 import butterknife.BindView;

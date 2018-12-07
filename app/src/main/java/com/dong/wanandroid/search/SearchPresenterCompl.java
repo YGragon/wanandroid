@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.dong.wanandroid.base.BasePresenter;
-import com.dong.wanandroid.constant.ApiConstant;
+import com.dong.wanandroid.http.ApiConstant;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
-import com.dong.wanandroid.model.home.HomeArticleList;
-import com.dong.wanandroid.model.home.HomeArticleModel;
-import com.dong.wanandroid.model.search.SearchHotList;
-import com.dong.wanandroid.model.search.SearchModel;
+import com.dong.wanandroid.data.home.HomeArticleList;
+import com.dong.wanandroid.data.home.HomeArticleModel;
+import com.dong.wanandroid.data.search.SearchHotList;
+import com.dong.wanandroid.data.search.SearchModel;
 import com.dong.wanandroid.browser.BrowserActivity;
 
 import java.util.ArrayList;

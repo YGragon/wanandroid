@@ -1,7 +1,7 @@
 package com.dong.wanandroid.search;
 
-import com.dong.wanandroid.model.home.HomeArticleModel;
-import com.dong.wanandroid.model.search.SearchModel;
+import com.dong.wanandroid.data.home.HomeArticleModel;
+import com.dong.wanandroid.data.search.SearchModel;
 
 import java.util.ArrayList;
 import java.util.List;

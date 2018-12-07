@@ -1,6 +1,6 @@
 package com.dong.wanandroid.home;
 
-import com.dong.wanandroid.model.home.HomeArticleModel;
+import com.dong.wanandroid.data.home.HomeArticleModel;
 
 import java.util.ArrayList;
 

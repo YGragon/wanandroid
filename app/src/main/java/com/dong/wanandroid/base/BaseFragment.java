@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dong.wanandroid.model.event_bus_model.Event;
+import com.dong.wanandroid.data.event_bus_model.Event;
 import com.dong.wanandroid.util.third_lib.EventBusUtil;
 
 import org.greenrobot.eventbus.Subscribe;

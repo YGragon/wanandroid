@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.welfare;
+package com.dong.wanandroid.data.welfare;
 
 import java.util.List;
 

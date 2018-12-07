@@ -19,10 +19,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseFragment;
-import com.dong.wanandroid.model.db.DBHelper;
-import com.dong.wanandroid.model.event_bus_model.Event;
-import com.dong.wanandroid.model.read_record.ReadRecordModel;
-import com.dong.wanandroid.model.user.UserModel;
+import com.dong.wanandroid.data.db.DBHelper;
+import com.dong.wanandroid.data.event_bus_model.Event;
+import com.dong.wanandroid.data.read_record.ReadRecordModel;
+import com.dong.wanandroid.data.user.UserModel;
 import com.dong.wanandroid.util.LogUtils;
 import com.dong.wanandroid.util.tool.AppBarStateChangeListener;
 

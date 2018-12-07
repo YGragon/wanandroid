@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.banner;
+package com.dong.wanandroid.data.banner;
 
 import java.util.List;
 

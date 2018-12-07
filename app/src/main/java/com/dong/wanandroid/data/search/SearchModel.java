@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.search;
+package com.dong.wanandroid.data.search;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

@@ -2,8 +2,8 @@ package com.dong.wanandroid.home;
 
 import android.content.Context;
 
-import com.dong.wanandroid.model.home.HomeArticleModel;
-import com.dong.wanandroid.model.read_record.ReadRecordModel;
+import com.dong.wanandroid.data.home.HomeArticleModel;
+import com.dong.wanandroid.data.read_record.ReadRecordModel;
 
 import java.util.ArrayList;
 import java.util.List;

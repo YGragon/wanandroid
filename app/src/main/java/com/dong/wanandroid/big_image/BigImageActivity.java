@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.model.welfare.WelfareModel;
+import com.dong.wanandroid.data.welfare.WelfareModel;
 
 import java.util.ArrayList;
 import java.util.List;

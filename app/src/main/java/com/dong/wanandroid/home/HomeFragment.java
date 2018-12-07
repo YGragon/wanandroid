@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseFragment;
-import com.dong.wanandroid.model.home.HomeArticleModel;
+import com.dong.wanandroid.data.home.HomeArticleModel;
 import com.dong.wanandroid.util.ReplaceClickUtils;
 import com.dong.wanandroid.util.tool.GlideImageLoader;
 import com.youth.banner.Banner;

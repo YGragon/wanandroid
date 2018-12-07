@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.http;
+package com.dong.wanandroid.http;
 
 /**
  * Created by macmini002 on 18/6/7.

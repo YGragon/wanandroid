@@ -1,6 +1,6 @@
 package com.dong.wanandroid.login;
 
-import com.dong.wanandroid.model.user.UserModel;
+import com.dong.wanandroid.data.user.UserModel;
 
 /**
  * Created by macmini002 on 18/2/28.

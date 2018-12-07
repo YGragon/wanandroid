@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dong.wanandroid.R;
-import com.dong.wanandroid.model.welfare.WelfareModel;
+import com.dong.wanandroid.data.welfare.WelfareModel;
 
 import java.util.List;
 

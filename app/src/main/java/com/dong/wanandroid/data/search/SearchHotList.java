@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.search;
+package com.dong.wanandroid.data.search;
 
 import java.util.List;
 

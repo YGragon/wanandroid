@@ -1,11 +1,11 @@
 package com.dong.wanandroid.http;
 
-import com.dong.wanandroid.model.banner.BannerList;
-import com.dong.wanandroid.model.flow.FlowGankModel;
-import com.dong.wanandroid.model.home.HomeArticleList;
-import com.dong.wanandroid.model.user.UserListModel;
-import com.dong.wanandroid.model.welfare.WelfareList;
-import com.dong.wanandroid.model.search.SearchHotList;
+import com.dong.wanandroid.data.banner.BannerList;
+import com.dong.wanandroid.data.flow.FlowGankModel;
+import com.dong.wanandroid.data.home.HomeArticleList;
+import com.dong.wanandroid.data.user.UserListModel;
+import com.dong.wanandroid.data.welfare.WelfareList;
+import com.dong.wanandroid.data.search.SearchHotList;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

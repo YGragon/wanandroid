@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dong.wanandroid.R;
-import com.dong.wanandroid.model.read_record.ReadRecordModel;
+import com.dong.wanandroid.data.read_record.ReadRecordModel;
 
 import java.util.List;
 

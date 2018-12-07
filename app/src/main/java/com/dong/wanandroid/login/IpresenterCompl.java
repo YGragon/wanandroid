@@ -2,10 +2,10 @@ package com.dong.wanandroid.login;
 
 import android.content.Context;
 
-import com.dong.wanandroid.constant.ApiConstant;
+import com.dong.wanandroid.http.ApiConstant;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
-import com.dong.wanandroid.model.user.UserListModel;
+import com.dong.wanandroid.data.user.UserListModel;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

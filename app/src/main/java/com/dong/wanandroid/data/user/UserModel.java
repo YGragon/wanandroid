@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.user;
+package com.dong.wanandroid.data.user;
 
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;

@@ -1,6 +1,6 @@
 package com.dong.wanandroid.collect;
 
-import com.dong.wanandroid.model.home.HomeArticleBean;
+import com.dong.wanandroid.data.home.HomeArticleBean;
 
 /**
  * Created by Administrator on 2018/3/18.

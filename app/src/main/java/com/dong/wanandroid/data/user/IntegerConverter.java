@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.user;
+package com.dong.wanandroid.data.user;
 
 import com.google.gson.Gson;
 

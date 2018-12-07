@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.home;
+package com.dong.wanandroid.data.home;
 
 /**
  * Created by Administrator on 2018/2/28.

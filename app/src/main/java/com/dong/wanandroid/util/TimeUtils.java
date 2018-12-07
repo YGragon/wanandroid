@@ -3,7 +3,7 @@ package com.dong.wanandroid.util;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 
-import com.dong.wanandroid.constant.TimeConstants;
+import com.dong.wanandroid.data.TimeConstants;
 
 import java.text.DateFormat;
 import java.text.ParseException;

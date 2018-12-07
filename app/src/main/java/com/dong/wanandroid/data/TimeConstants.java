@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.http;
+package com.dong.wanandroid.data;
 
 import android.support.annotation.IntDef;
 

@@ -1,6 +1,6 @@
 package com.dong.wanandroid.big_image;
 
-import com.dong.wanandroid.model.welfare.WelfareModel;
+import com.dong.wanandroid.data.welfare.WelfareModel;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.banner;
+package com.dong.wanandroid.data.banner;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

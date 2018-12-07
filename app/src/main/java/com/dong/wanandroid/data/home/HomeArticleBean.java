@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.home;
+package com.dong.wanandroid.data.home;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.dong.wanandroid.util.third_lib;
 
-import com.dong.wanandroid.model.event_bus_model.Event;
+import com.dong.wanandroid.data.event_bus_model.Event;
 
 import org.greenrobot.eventbus.EventBus;
 

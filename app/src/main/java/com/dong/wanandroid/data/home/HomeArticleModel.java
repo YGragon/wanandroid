@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.home;
+package com.dong.wanandroid.data.home;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

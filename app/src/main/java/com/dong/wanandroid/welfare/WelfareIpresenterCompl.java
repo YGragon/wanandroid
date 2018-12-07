@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.dong.wanandroid.base.BasePresenter;
-import com.dong.wanandroid.constant.ApiConstant;
+import com.dong.wanandroid.http.ApiConstant;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
-import com.dong.wanandroid.model.welfare.WelfareList;
-import com.dong.wanandroid.model.welfare.WelfareModel;
+import com.dong.wanandroid.data.welfare.WelfareList;
+import com.dong.wanandroid.data.welfare.WelfareModel;
 import com.dong.wanandroid.big_image.BigImageActivity;
 
 import java.util.ArrayList;

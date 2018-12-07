@@ -1,6 +1,6 @@
-package com.dong.wanandroid.model.event_bus_model;
+package com.dong.wanandroid.data.event_bus_model;
 
-import com.dong.wanandroid.model.user.UserModel;
+import com.dong.wanandroid.data.user.UserModel;
 
 /**
  * 传递用户信息的EventBus消息事件

@@ -1,4 +1,4 @@
-package com.dong.wanandroid.model.read_record;
+package com.dong.wanandroid.data.read_record;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

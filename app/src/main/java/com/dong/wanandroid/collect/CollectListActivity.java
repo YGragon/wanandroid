@@ -10,8 +10,8 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.model.home.HomeArticleBean;
-import com.dong.wanandroid.model.home.HomeArticleModel;
+import com.dong.wanandroid.data.home.HomeArticleBean;
+import com.dong.wanandroid.data.home.HomeArticleModel;
 import com.dong.wanandroid.home.HomeArticleAdapter;
 
 import java.util.ArrayList;
