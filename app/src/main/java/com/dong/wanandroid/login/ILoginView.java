@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity.login;
+package com.dong.wanandroid.login;
 
 import com.dong.wanandroid.model.user.UserModel;
 

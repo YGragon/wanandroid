@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.welfare;
+package com.dong.wanandroid.welfare;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +9,7 @@ import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
 import com.dong.wanandroid.model.welfare.WelfareList;
 import com.dong.wanandroid.model.welfare.WelfareModel;
-import com.dong.wanandroid.ui.fragment.welfare.WelfareIView;
-import com.dong.wanandroid.ui.activity.big_image.BigImageActivity;
+import com.dong.wanandroid.big_image.BigImageActivity;
 
 import java.util.ArrayList;
 

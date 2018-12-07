@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.adapter;
+package com.dong.wanandroid.welfare;
 
 import android.support.annotation.LayoutRes;
 import android.widget.ImageView;

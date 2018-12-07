@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.login;
+package com.dong.wanandroid.login;
 
 /**
  * Created by macmini002 on 18/2/28.

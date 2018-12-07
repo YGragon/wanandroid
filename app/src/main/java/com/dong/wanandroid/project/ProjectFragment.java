@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.fragment.project;
+package com.dong.wanandroid.project;
 
 
 import android.support.v4.app.Fragment;

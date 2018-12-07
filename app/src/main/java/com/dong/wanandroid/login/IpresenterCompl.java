@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.login;
+package com.dong.wanandroid.login;
 
 import android.content.Context;
 
@@ -6,7 +6,6 @@ import com.dong.wanandroid.constant.ApiConstant;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
 import com.dong.wanandroid.model.user.UserListModel;
-import com.dong.wanandroid.ui.activity.login.ILoginView;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

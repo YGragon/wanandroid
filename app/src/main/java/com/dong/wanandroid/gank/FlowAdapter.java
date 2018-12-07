@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.adapter;
+package com.dong.wanandroid.gank;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;

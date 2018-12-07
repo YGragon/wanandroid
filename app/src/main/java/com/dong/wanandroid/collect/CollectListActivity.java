@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity.collect;
+package com.dong.wanandroid.collect;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +12,7 @@ import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
 import com.dong.wanandroid.model.home.HomeArticleBean;
 import com.dong.wanandroid.model.home.HomeArticleModel;
-import com.dong.wanandroid.presenter.collect.CollectIpresenterCompl;
-import com.dong.wanandroid.ui.adapter.HomeArticleAdapter;
+import com.dong.wanandroid.home.HomeArticleAdapter;
 
 import java.util.ArrayList;
 

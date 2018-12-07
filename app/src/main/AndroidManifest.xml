@@ -30,23 +30,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.login.LoginActivity"
+            android:name=".login.LoginActivity"
             android:theme="@style/ActivityTheme" />
         <activity
-            android:name=".ui.activity.register.RegisterActivity"
+            android:name=".register.RegisterActivity"
             android:theme="@style/ActivityTheme" />
         <activity
-            android:name=".ui.activity.browser.BrowserActivity"
+            android:name=".browser.BrowserActivity"
             android:theme="@style/ActivityTheme" />
         <activity
-            android:name=".ui.activity.search.SearchActivity"
+            android:name=".search.SearchActivity"
             android:theme="@style/ActivityTheme" />
         <activity
-            android:name=".ui.activity.big_image.BigImageActivity"
+            android:name=".big_image.BigImageActivity"
             android:theme="@style/ActivityTheme" />
 
-        <activity android:name=".ui.activity.collect.CollectListActivity" />
-        <activity android:name=".ui.activity.FlowActivity" />
+        <activity android:name=".collect.CollectListActivity" />
+        <activity android:name=".gank.FlowActivity" />
     </application>
 
 </manifest>

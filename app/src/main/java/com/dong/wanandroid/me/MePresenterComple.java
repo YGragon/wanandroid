@@ -1,16 +1,15 @@
-package com.dong.wanandroid.presenter.me;
+package com.dong.wanandroid.me;
 
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.dong.wanandroid.db.DBHelper;
+import com.dong.wanandroid.model.db.DBHelper;
 import com.dong.wanandroid.model.event_bus_model.UserEvent;
-import com.dong.wanandroid.ui.activity.login.LoginActivity;
+import com.dong.wanandroid.login.LoginActivity;
 import com.dong.wanandroid.model.user.UserModel;
-import com.dong.wanandroid.ui.fragment.me.MeIView;
-import com.dong.wanandroid.ui.activity.collect.CollectListActivity;
-import com.dong.wanandroid.ui.activity.FlowActivity;
+import com.dong.wanandroid.collect.CollectListActivity;
+import com.dong.wanandroid.gank.FlowActivity;
 import com.dong.wanandroid.util.LogUtils;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 

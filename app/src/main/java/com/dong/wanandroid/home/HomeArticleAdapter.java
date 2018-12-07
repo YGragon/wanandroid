@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.adapter;
+package com.dong.wanandroid.home;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

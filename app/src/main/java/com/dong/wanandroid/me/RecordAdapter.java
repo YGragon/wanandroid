@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.adapter;
+package com.dong.wanandroid.me;
 
 import android.support.annotation.Nullable;
 import android.widget.TextView;

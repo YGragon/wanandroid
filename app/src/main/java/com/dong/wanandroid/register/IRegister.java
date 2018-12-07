@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity.register;
+package com.dong.wanandroid.register;
 
 import com.dong.wanandroid.model.user.UserModel;
 

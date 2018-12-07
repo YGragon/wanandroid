@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity.login;
+package com.dong.wanandroid.login;
 
 import android.content.Intent;
 import android.text.TextUtils;
@@ -10,13 +10,11 @@ import android.widget.Toast;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.db.DBHelper;
+import com.dong.wanandroid.model.db.DBHelper;
 import com.dong.wanandroid.model.event_bus_model.Event;
 import com.dong.wanandroid.model.event_bus_model.EventConfig;
 import com.dong.wanandroid.model.user.UserModel;
-import com.dong.wanandroid.presenter.login.IPresenter;
-import com.dong.wanandroid.presenter.login.IpresenterCompl;
-import com.dong.wanandroid.ui.activity.register.RegisterActivity;
+import com.dong.wanandroid.register.RegisterActivity;
 import com.dong.wanandroid.util.third_lib.EventBusUtil;
 
 import butterknife.BindView;

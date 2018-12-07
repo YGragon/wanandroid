@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.bigimage;
+package com.dong.wanandroid.big_image;
 
 import android.content.Context;
 

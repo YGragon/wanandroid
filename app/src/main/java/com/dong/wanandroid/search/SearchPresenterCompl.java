@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.search;
+package com.dong.wanandroid.search;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,7 @@ import com.dong.wanandroid.model.home.HomeArticleList;
 import com.dong.wanandroid.model.home.HomeArticleModel;
 import com.dong.wanandroid.model.search.SearchHotList;
 import com.dong.wanandroid.model.search.SearchModel;
-import com.dong.wanandroid.ui.activity.search.SearchIView;
-import com.dong.wanandroid.ui.activity.browser.BrowserActivity;
+import com.dong.wanandroid.browser.BrowserActivity;
 
 import java.util.ArrayList;
 import java.util.List;

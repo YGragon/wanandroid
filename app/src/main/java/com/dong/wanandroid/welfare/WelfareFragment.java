@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.fragment.welfare;
+package com.dong.wanandroid.welfare;
 
 
 import android.support.v4.app.Fragment;
@@ -12,9 +12,6 @@ import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseFragment;
 import com.dong.wanandroid.constant.ApiParamConstant;
 import com.dong.wanandroid.model.welfare.WelfareModel;
-import com.dong.wanandroid.presenter.welfare.WelfareIpresenter;
-import com.dong.wanandroid.presenter.welfare.WelfareIpresenterCompl;
-import com.dong.wanandroid.ui.adapter.WelfareAdapter;
 import com.dong.wanandroid.util.ReplaceClickUtils;
 import com.dong.wanandroid.util.tool.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.util.DensityUtil;

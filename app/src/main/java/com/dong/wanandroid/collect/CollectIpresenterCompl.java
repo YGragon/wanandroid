@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.collect;
+package com.dong.wanandroid.collect;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,12 +20,11 @@ import com.app.hubert.guide.model.HighLight;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BasePresenter;
 import com.dong.wanandroid.model.home.HomeArticleBean;
-import com.dong.wanandroid.ui.activity.collect.CollectIView;
 import com.dong.wanandroid.constant.ApiConstant;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
 import com.dong.wanandroid.model.home.HomeArticleList;
-import com.dong.wanandroid.ui.activity.browser.BrowserActivity;
+import com.dong.wanandroid.browser.BrowserActivity;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

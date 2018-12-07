@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity.search;
+package com.dong.wanandroid.search;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,9 +14,6 @@ import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
 import com.dong.wanandroid.model.home.HomeArticleModel;
 import com.dong.wanandroid.model.search.SearchModel;
-import com.dong.wanandroid.presenter.search.SearchIPresenter;
-import com.dong.wanandroid.presenter.search.SearchPresenterCompl;
-import com.dong.wanandroid.ui.adapter.SearchAdapter;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.ArrayList;

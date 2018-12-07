@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity.search;
+package com.dong.wanandroid.search;
 
 import com.dong.wanandroid.model.home.HomeArticleModel;
 import com.dong.wanandroid.model.search.SearchModel;

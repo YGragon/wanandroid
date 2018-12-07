@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.adapter;
+package com.dong.wanandroid.home;
 
 import android.content.Context;
 import android.view.LayoutInflater;

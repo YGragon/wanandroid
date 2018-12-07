@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.home;
+package com.dong.wanandroid.home;
 
 import android.content.Context;
 

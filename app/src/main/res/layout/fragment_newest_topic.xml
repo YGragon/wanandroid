@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.NewestTopicFragment">
+    tools:context=".gank.NewestTopicFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/flow_recycler_view"

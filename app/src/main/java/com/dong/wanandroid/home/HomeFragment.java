@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.fragment.home;
+package com.dong.wanandroid.home;
 
 
 import android.support.v4.app.Fragment;
@@ -15,10 +15,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseFragment;
 import com.dong.wanandroid.model.home.HomeArticleModel;
-import com.dong.wanandroid.presenter.home.HomeIPresenter;
-import com.dong.wanandroid.presenter.home.HomeIPresenterCompl;
-import com.dong.wanandroid.ui.adapter.HomeArticleAdapter;
-import com.dong.wanandroid.ui.adapter.HomeFuncGridViewAdapter;
 import com.dong.wanandroid.util.ReplaceClickUtils;
 import com.dong.wanandroid.util.tool.GlideImageLoader;
 import com.youth.banner.Banner;

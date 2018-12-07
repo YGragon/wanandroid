@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.ui.fragment.home.HomeFragment;
-import com.dong.wanandroid.ui.fragment.me.MeFragment;
-import com.dong.wanandroid.ui.fragment.project.ProjectFragment;
-import com.dong.wanandroid.ui.fragment.welfare.WelfareFragment;
+import com.dong.wanandroid.home.HomeFragment;
+import com.dong.wanandroid.me.MeFragment;
+import com.dong.wanandroid.project.ProjectFragment;
+import com.dong.wanandroid.welfare.WelfareFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 

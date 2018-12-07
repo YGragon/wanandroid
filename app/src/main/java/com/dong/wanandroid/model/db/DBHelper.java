@@ -1,4 +1,4 @@
-package com.dong.wanandroid.db;
+package com.dong.wanandroid.model.db;
 
 import com.dong.wanandroid.BaseApplication;
 import com.dong.wanandroid.model.banner.Banner;

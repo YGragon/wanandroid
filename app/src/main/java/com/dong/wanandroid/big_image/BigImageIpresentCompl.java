@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.bigimage;
+package com.dong.wanandroid.big_image;
 
 import android.content.Context;
 
@@ -8,7 +8,6 @@ import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
 import com.dong.wanandroid.model.welfare.WelfareList;
 import com.dong.wanandroid.model.welfare.WelfareModel;
-import com.dong.wanandroid.ui.activity.big_image.BigImageIView;
 
 import java.util.ArrayList;
 

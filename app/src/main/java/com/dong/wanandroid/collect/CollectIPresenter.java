@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.collect;
+package com.dong.wanandroid.collect;
 
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;

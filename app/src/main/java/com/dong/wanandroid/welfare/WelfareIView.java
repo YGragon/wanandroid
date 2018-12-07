@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.fragment.welfare;
+package com.dong.wanandroid.welfare;
 
 import com.dong.wanandroid.model.welfare.WelfareModel;
 

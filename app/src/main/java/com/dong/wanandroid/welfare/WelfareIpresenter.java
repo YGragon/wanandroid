@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.welfare;
+package com.dong.wanandroid.welfare;
 
 import android.content.Context;
 

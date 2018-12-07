@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.register;
+package com.dong.wanandroid.register;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,7 +7,6 @@ import com.dong.wanandroid.constant.ApiConstant;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
 import com.dong.wanandroid.model.user.UserListModel;
-import com.dong.wanandroid.ui.activity.register.IRegister;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

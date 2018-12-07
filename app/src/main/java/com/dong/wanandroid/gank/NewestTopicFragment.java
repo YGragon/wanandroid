@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.fragment;
+package com.dong.wanandroid.gank;
 
 
 import android.content.Intent;
@@ -16,8 +16,8 @@ import com.dong.wanandroid.model.flow.FlowGankModel;
 import com.dong.wanandroid.constant.ApiConstant;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
-import com.dong.wanandroid.ui.activity.browser.BrowserActivity;
-import com.dong.wanandroid.ui.adapter.FlowAdapter;
+import com.dong.wanandroid.browser.BrowserActivity;
+import com.dong.wanandroid.gank.FlowAdapter;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.search;
+package com.dong.wanandroid.search;
 
 import android.content.Context;
 

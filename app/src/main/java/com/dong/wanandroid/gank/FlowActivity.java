@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity;
+package com.dong.wanandroid.gank;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.ui.adapter.TabFragmentPagerAdapter;
-import com.dong.wanandroid.ui.fragment.NewestTopicFragment;
-import com.dong.wanandroid.ui.fragment.RecommendTopicFragment;
 
 import java.util.ArrayList;
 

@@ -1,16 +1,12 @@
-package com.dong.wanandroid.ui.activity.big_image;
+package com.dong.wanandroid.big_image;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
 import com.dong.wanandroid.model.welfare.WelfareModel;
-import com.dong.wanandroid.presenter.bigimage.BigImageIPresent;
-import com.dong.wanandroid.presenter.bigimage.BigImageIpresentCompl;
-import com.dong.wanandroid.ui.adapter.BigImageViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

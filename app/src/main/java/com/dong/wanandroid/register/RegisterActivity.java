@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity.register;
+package com.dong.wanandroid.register;
 
 import android.content.Intent;
 import android.text.TextUtils;
@@ -9,9 +9,7 @@ import android.widget.Toast;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
 import com.dong.wanandroid.model.user.UserModel;
-import com.dong.wanandroid.presenter.register.IPresenter;
-import com.dong.wanandroid.presenter.register.IpresenterCompl;
-import com.dong.wanandroid.ui.activity.login.LoginActivity;
+import com.dong.wanandroid.login.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

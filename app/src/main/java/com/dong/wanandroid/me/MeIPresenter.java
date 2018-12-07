@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.me;
+package com.dong.wanandroid.me;
 
 import android.content.Context;
 

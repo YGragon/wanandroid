@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.home;
+package com.dong.wanandroid.home;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,15 +7,14 @@ import com.dong.wanandroid.model.banner.Banner;
 import com.dong.wanandroid.model.banner.BannerList;
 import com.dong.wanandroid.base.BasePresenter;
 import com.dong.wanandroid.constant.ApiConstant;
-import com.dong.wanandroid.db.DBHelper;
+import com.dong.wanandroid.model.db.DBHelper;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
 import com.dong.wanandroid.model.home.HomeArticleList;
 import com.dong.wanandroid.model.home.HomeArticleModel;
 import com.dong.wanandroid.model.read_record.ReadRecordModel;
-import com.dong.wanandroid.ui.activity.search.SearchActivity;
-import com.dong.wanandroid.ui.fragment.home.HomeIView;
-import com.dong.wanandroid.ui.activity.browser.BrowserActivity;
+import com.dong.wanandroid.search.SearchActivity;
+import com.dong.wanandroid.browser.BrowserActivity;
 import com.dong.wanandroid.util.NetworkUtils;
 
 import java.util.ArrayList;

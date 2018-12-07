@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.fragment.me;
+package com.dong.wanandroid.me;
 
 public interface MeIView {
     void showUserLogin(String username) ;

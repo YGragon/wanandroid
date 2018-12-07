@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.fragment;
+package com.dong.wanandroid.gank;
 
 
 import android.os.Bundle;

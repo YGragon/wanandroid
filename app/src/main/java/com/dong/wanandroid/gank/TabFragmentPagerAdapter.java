@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.adapter;
+package com.dong.wanandroid.gank;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,4 +1,4 @@
-package com.dong.wanandroid.presenter.register;
+package com.dong.wanandroid.register;
 
 /**
  * Created by macmini002 on 18/2/28.

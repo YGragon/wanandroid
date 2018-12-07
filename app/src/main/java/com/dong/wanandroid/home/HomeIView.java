@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.fragment.home;
+package com.dong.wanandroid.home;
 
 import com.dong.wanandroid.model.home.HomeArticleModel;
 

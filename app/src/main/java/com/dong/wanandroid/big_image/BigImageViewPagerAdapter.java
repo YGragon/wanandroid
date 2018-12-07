@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.adapter;
+package com.dong.wanandroid.big_image;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

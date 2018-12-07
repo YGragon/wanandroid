@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity.big_image;
+package com.dong.wanandroid.big_image;
 
 import com.dong.wanandroid.model.welfare.WelfareModel;
 

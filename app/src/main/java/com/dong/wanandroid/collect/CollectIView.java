@@ -1,4 +1,4 @@
-package com.dong.wanandroid.ui.activity.collect;
+package com.dong.wanandroid.collect;
 
 import com.dong.wanandroid.model.home.HomeArticleBean;
 
