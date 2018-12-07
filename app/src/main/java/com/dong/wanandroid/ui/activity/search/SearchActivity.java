@@ -1,6 +1,5 @@
 package com.dong.wanandroid.ui.activity.search;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,7 +24,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -58,59 +56,6 @@ public class SearchActivity extends BaseActivity implements SearchIView, TagClou
     private LinearLayoutManager mLinearLayoutManager;
     private List<String> mHotKeyTags;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        ButterKnife.bind(this);
-
-        // ItemView
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        searchAdapter = new SearchAdapter(R.layout.home_article_item, searchModels);
-        recyclerView.setLayoutManager(mLinearLayoutManager);
-        recyclerView.setAdapter(searchAdapter);
-
-        searchIPresenter = new SearchPresenterCompl(this);
-        // 获取热搜的关键词
-        searchIPresenter.getHotKeyList(this);
-
-        // 利用RxBinding进行联想搜索
-        RxTextView.textChanges(searchEt)
-                //当你敲完字之后停下来的半秒就会执行下面语句
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .filter(new Predicate<CharSequence>() {
-                    @Override
-                    public boolean test(@NonNull CharSequence charSequence) throws Exception {
-                        // 过滤掉输入内容为空的情况，输入为空不请求
-                        return charSequence.length() > 0;
-                    }
-                })
-                //下面这两个都是数据转换
-                //flatMap：当同时多个网络请求访问的时候，前面的网络数据会覆盖后面的网络数据
-                //switchMap：当同时多个网络请求访问的时候，会以最后一个发送请求为准，前面网路数据会被最后一个覆盖
-                .switchMap(new Function<CharSequence, Observable<ArrayList<HomeArticleModel>>>() {
-                    @Override
-                    public Observable<ArrayList<HomeArticleModel>> apply(@NonNull CharSequence charSequence) throws Exception {
-                        //网络操作，获取我们需要的数据
-                        Log.e(TAG, "apply: 发送数据  " );
-                        searchIPresenter.getSearchResultList(SearchActivity.this, page, searchEt.getText().toString().trim());
-
-                        return Observable.just(searchModels);
-                    }
-                })
-                //网络请求是在子线程的
-                .subscribeOn(Schedulers.io())
-                //界面更新在主线程
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<HomeArticleModel>>() {
-                    @Override
-                    public void accept(@NonNull List<HomeArticleModel> models) throws Exception {
-                        //界面更新，这里用打印替代
-                        Log.e(TAG, "apply: 接收数据  " );
-                        Log.e(TAG, "accept: data----->"+models.toString() );
-                    }
-                });
-    }
 
     @Override
     public void showHotKey(List<SearchModel> searchHotLists) {
@@ -187,5 +132,62 @@ public class SearchActivity extends BaseActivity implements SearchIView, TagClou
                 searchIPresenter.getSearchResultList(this,page,searchEt.getText().toString().trim());
                 break;
         }
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_search;
+    }
+
+    @Override
+    public void initView() {
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        searchAdapter = new SearchAdapter(R.layout.home_article_item, searchModels);
+        recyclerView.setLayoutManager(mLinearLayoutManager);
+        recyclerView.setAdapter(searchAdapter);
+    }
+
+    @Override
+    public void initData() {
+        searchIPresenter = new SearchPresenterCompl(this);
+        // 获取热搜的关键词
+        searchIPresenter.getHotKeyList(this);
+
+        // 利用RxBinding进行联想搜索
+        RxTextView.textChanges(searchEt)
+                //当你敲完字之后停下来的半秒就会执行下面语句
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .filter(new Predicate<CharSequence>() {
+                    @Override
+                    public boolean test(@NonNull CharSequence charSequence) throws Exception {
+                        // 过滤掉输入内容为空的情况，输入为空不请求
+                        return charSequence.length() > 0;
+                    }
+                })
+                //下面这两个都是数据转换
+                //flatMap：当同时多个网络请求访问的时候，前面的网络数据会覆盖后面的网络数据
+                //switchMap：当同时多个网络请求访问的时候，会以最后一个发送请求为准，前面网路数据会被最后一个覆盖
+                .switchMap(new Function<CharSequence, Observable<ArrayList<HomeArticleModel>>>() {
+                    @Override
+                    public Observable<ArrayList<HomeArticleModel>> apply(@NonNull CharSequence charSequence) throws Exception {
+                        //网络操作，获取我们需要的数据
+                        Log.e(TAG, "apply: 发送数据  " );
+                        searchIPresenter.getSearchResultList(SearchActivity.this, page, searchEt.getText().toString().trim());
+
+                        return Observable.just(searchModels);
+                    }
+                })
+                //网络请求是在子线程的
+                .subscribeOn(Schedulers.io())
+                //界面更新在主线程
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<HomeArticleModel>>() {
+                    @Override
+                    public void accept(@NonNull List<HomeArticleModel> models) throws Exception {
+                        //界面更新，这里用打印替代
+                        Log.e(TAG, "apply: 接收数据  " );
+                        Log.e(TAG, "accept: data----->"+models.toString() );
+                    }
+                });
     }
 }

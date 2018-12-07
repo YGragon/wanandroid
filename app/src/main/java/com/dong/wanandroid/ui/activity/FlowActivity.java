@@ -1,6 +1,5 @@
 package com.dong.wanandroid.ui.activity;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -17,7 +16,6 @@ import com.dong.wanandroid.ui.fragment.RecommendTopicFragment;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class FlowActivity extends BaseActivity {
 
@@ -43,21 +41,25 @@ public class FlowActivity extends BaseActivity {
     private RecommendTopicFragment recommendTopicFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_flow);
-        ButterKnife.bind(this);
+    public int intiLayout() {
+        return R.layout.activity_flow;
+    }
 
-
+    @Override
+    public void initView() {
         fragmentArrayList.clear();
         newestTopicFragment = new NewestTopicFragment();
         recommendTopicFragment = new RecommendTopicFragment();
         fragmentArrayList.add(newestTopicFragment);
         fragmentArrayList.add(recommendTopicFragment);
 
+
+    }
+
+    @Override
+    public void initData() {
         tabFragmentPagerAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager(), fragmentArrayList);
         viewPager.setAdapter(tabFragmentPagerAdapter);
         viewPager.setCurrentItem(0);
-
     }
 }

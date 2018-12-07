@@ -1,6 +1,5 @@
 package com.dong.wanandroid;
 
-import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,10 +15,11 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
+
     private static final String TAG = "MainActivity";
+
     @BindView(R.id.contentContainer)
     FrameLayout contentContainer;
     @BindView(R.id.bottomBar)
@@ -37,15 +37,20 @@ public class MainActivity extends BaseActivity {
     private FragmentTransaction ft;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+    public int intiLayout() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    public void initView() {
         homeFragment = HomeFragment.getInstance();
         mWelfareFragment = WelfareFragment.getInstance();
         projectFragment = ProjectFragment.getInstance();
         meFragment = MeFragment.getInstance();
+    }
+
+    @Override
+    public void initData() {
         setDefaultFragment(homeFragment);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -69,21 +74,33 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-    public void setDefaultFragment(Fragment fragment) {
+
+    /**
+     * 设置默认的 Fragment
+     * @param fragment
+     */
+    private void setDefaultFragment(Fragment fragment) {
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.add(R.id.contentContainer, fragment).commit();
         mContent = fragment;
     }
-    //切换fragment的显示隐藏
-    public void switchContent(Fragment to) {
+
+    /**
+     * 切换fragment的显示隐藏
+     * @param to
+     */
+    private void switchContent(Fragment to) {
         if (mContent != to) {
             fm = getSupportFragmentManager();
             ft = fm.beginTransaction();
-            if (!to.isAdded()) {    // 先判断是否被add过
-                ft.hide(mContent).add(R.id.contentContainer, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            // 先判断是否被add过
+            if (!to.isAdded()) {
+                // 隐藏当前的fragment，add下一个到Activity中
+                ft.hide(mContent).add(R.id.contentContainer, to).commit();
             } else {
-                ft.hide(mContent).show(to).commit(); // 隐藏当前的fragment，显示下一个
+                // 隐藏当前的fragment，显示下一个
+                ft.hide(mContent).show(to).commit();
             }
             mContent = to;
         }

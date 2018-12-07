@@ -1,7 +1,6 @@
 package com.dong.wanandroid.ui.activity.register;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,13 +8,12 @@ import android.widget.Toast;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.ui.activity.login.LoginActivity;
 import com.dong.wanandroid.model.user.UserModel;
 import com.dong.wanandroid.presenter.register.IPresenter;
 import com.dong.wanandroid.presenter.register.IpresenterCompl;
+import com.dong.wanandroid.ui.activity.login.LoginActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity implements IRegister {
@@ -32,14 +30,6 @@ public class RegisterActivity extends BaseActivity implements IRegister {
     private String userName;
     private String pwdstr;
     private String repwdstr;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
-        ipresenterCompl = new IpresenterCompl(this,this);
-    }
 
 
 
@@ -67,5 +57,21 @@ public class RegisterActivity extends BaseActivity implements IRegister {
         }else {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_register;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+        ipresenterCompl = new IpresenterCompl(this,this);
+
     }
 }

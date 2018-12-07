@@ -1,7 +1,6 @@
 package com.dong.wanandroid.ui.activity.big_image;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class BigImageActivity extends BaseActivity implements BigImageIView{
     private static final String TAG = "BigImageActivity";
@@ -33,12 +31,33 @@ public class BigImageActivity extends BaseActivity implements BigImageIView{
     private int mPage;
     private int mSize;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_big_image);
-        ButterKnife.bind(this);
 
+    @Override
+    public void showWelfareResult(ArrayList<WelfareModel> welfareModels, int size, int page) {
+        mWelfareModels.addAll(welfareModels) ;
+        mPage = page ;
+        mSize = size ;
+    }
+
+    @Override
+    public void showWelfareImage(ArrayList<String> images) {
+        mImagesList.addAll(images) ;
+        mAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_big_image;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
         Intent intent = getIntent();
         mImagesList = intent.getStringArrayListExtra("images");
         int position = intent.getIntExtra("position",0);
@@ -50,7 +69,6 @@ public class BigImageActivity extends BaseActivity implements BigImageIView{
         mAdapter = new BigImageViewPagerAdapter(this,mImagesList);
         mViewPager.setAdapter(mAdapter);
 
-        Log.e(TAG, "onCreate: position --->"+position);
         mViewPager.setCurrentItem(position);
 
         //监听ViewPager的跳转状态，当跳转到最后一页时，执行jumpToNext()方法
@@ -96,23 +114,4 @@ public class BigImageActivity extends BaseActivity implements BigImageIView{
             }
         });
     }
-
-    @Override
-    public void showWelfareResult(ArrayList<WelfareModel> welfareModels, int size, int page) {
-        Log.e(TAG, "showWelfareResult: welfareModels--size---->"+welfareModels.size());
-        mWelfareModels.addAll(welfareModels) ;
-        mPage = page ;
-        mSize = size ;
-        Log.e(TAG, "showWelfareResult: mPage------>"+mPage);
-    }
-
-    @Override
-    public void showWelfareImage(ArrayList<String> images) {
-        Log.e(TAG, "showWelfareImage: images--"+images.size());
-        mImagesList.addAll(images) ;
-        Log.e(TAG, "showWelfareImage: mImagesList--"+mImagesList.size());
-        mAdapter.notifyDataSetChanged();
-    }
-
-
 }

@@ -6,33 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.activity.browser.BrowserActivity">
+
     <LinearLayout
+        android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
-            app:contentInsetStart="0dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height">
-                <TextView
-                    android:id="@+id/browser_share_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/home_func_title_text_size_18sp"
-                    android:text="分享"/>
-            </RelativeLayout>
-        </android.support.v7.widget.Toolbar>
-        <LinearLayout
-            android:id="@+id/linearlayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"  />
-    </LinearLayout>
+        android:orientation="vertical"  />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

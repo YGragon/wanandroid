@@ -1,8 +1,6 @@
 package com.dong.wanandroid.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 
 import com.dong.wanandroid.model.event_bus_model.Event;
 import com.dong.wanandroid.util.EventBusUtil;
@@ -10,21 +8,31 @@ import com.dong.wanandroid.util.EventBusUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Created by Administrator on 2018/3/10.
  */
 
-public class BaseActivity extends SwipeBackActivity {
+public abstract class BaseActivity extends SwipeBackActivity {
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //设置布局
+        setContentView(intiLayout());
+        ButterKnife.bind(this);
+
+        //初始化控件
+        initView();
+        //设置数据
+        initData();
         if (isRegisterEventBus()) {
             EventBusUtil.register(this);
         }
     }
+
 
     /**
      * 是否注册事件分发
@@ -54,18 +62,14 @@ public class BaseActivity extends SwipeBackActivity {
      *
      * @param event 事件
      */
-    protected void receiveEvent(Event event) {
-
-    }
+    protected void receiveEvent(Event event) {}
 
     /**
      * 接受到分发的粘性事件
      *
      * @param event 粘性事件
      */
-    protected void receiveStickyEvent(Event event) {
-
-    }
+    protected void receiveStickyEvent(Event event) {}
 
     @Override
     public void onDestroy() {
@@ -74,4 +78,21 @@ public class BaseActivity extends SwipeBackActivity {
             EventBusUtil.unregister(this);
         }
     }
+
+    /**
+     * 设置布局
+     *
+     * @return
+     */
+    public abstract int intiLayout();
+
+    /**
+     * 初始化布局
+     */
+    public abstract void initView();
+
+    /**
+     * 设置数据
+     */
+    public abstract void initData();
 }

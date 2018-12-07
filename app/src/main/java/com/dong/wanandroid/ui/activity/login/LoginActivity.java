@@ -1,7 +1,6 @@
 package com.dong.wanandroid.ui.activity.login;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -12,16 +11,15 @@ import android.widget.Toast;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
 import com.dong.wanandroid.db.DBHelper;
-import com.dong.wanandroid.model.event_bus_model.UserEvent;
+import com.dong.wanandroid.model.event_bus_model.Event;
+import com.dong.wanandroid.model.event_bus_model.EventConfig;
 import com.dong.wanandroid.model.user.UserModel;
 import com.dong.wanandroid.presenter.login.IPresenter;
 import com.dong.wanandroid.presenter.login.IpresenterCompl;
 import com.dong.wanandroid.ui.activity.register.RegisterActivity;
-
-import org.greenrobot.eventbus.EventBus;
+import com.dong.wanandroid.util.EventBusUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements ILoginView {
@@ -41,13 +39,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     private String use;
     private String pwdstr;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
-        iPresenter = new IpresenterCompl(this,this);
-    }
+
 
     @OnClick({R.id.login_btn,R.id.register_btn})
     public void onViewClicked(View view) {
@@ -81,15 +73,31 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     }
 
     @Override
-    public void loginResult(int resultCode, String msg, UserModel userModle) {
+    public void loginResult(int resultCode, String msg, UserModel userModel) {
         if (resultCode == 0) {
-            Toast.makeText(this, "欢迎你"+userModle.getUsername(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "欢迎你"+userModel.getUsername(), Toast.LENGTH_SHORT).show();
             // 存储到数据库中
-            DBHelper.setUserToDb(userModle);
-            EventBus.getDefault().postSticky(new UserEvent(userModle));
+            DBHelper.setUserToDb(userModel);
+            EventBusUtil.sendStickyEvent(new Event<UserModel>(EventConfig.EVENT_LOGIN,userModel));
             finish();
         }else {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+        iPresenter = new IpresenterCompl(this,this);
+
     }
 }

@@ -1,6 +1,5 @@
 package com.dong.wanandroid.ui.activity.collect;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -11,15 +10,14 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.presenter.collect.CollectIpresenterCompl;
 import com.dong.wanandroid.model.home.HomeArticleBean;
 import com.dong.wanandroid.model.home.HomeArticleModel;
+import com.dong.wanandroid.presenter.collect.CollectIpresenterCompl;
 import com.dong.wanandroid.ui.adapter.HomeArticleAdapter;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CollectListActivity extends BaseActivity implements CollectIView {
     private static final String TAG = "CollectListActivity";
@@ -37,23 +35,6 @@ public class CollectListActivity extends BaseActivity implements CollectIView {
     private LinearLayoutManager mLinearLayoutManager;
     private HomeArticleAdapter mHomeArticleAdapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collect_list);
-        ButterKnife.bind(this);
-
-
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mHomeArticleAdapter = new HomeArticleAdapter(R.layout.home_article_item, mHomeArticleModels);
-        mRecyclerView.setAdapter(mHomeArticleAdapter);
-
-        mCollectIpresenterCompl = new CollectIpresenterCompl(this);
-        mCollectIpresenterCompl.getCollectList(this, page);
-
-
-    }
 
     @Override
     public void showCollectResult(int resultCode, String errorMsg, final int totalCount,HomeArticleBean data) {
@@ -111,5 +92,25 @@ public class CollectListActivity extends BaseActivity implements CollectIView {
     @Override
     public void showGuideViewResult() {
 
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_collect_list;
+    }
+
+    @Override
+    public void initView() {
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mHomeArticleAdapter = new HomeArticleAdapter(R.layout.home_article_item, mHomeArticleModels);
+        mRecyclerView.setAdapter(mHomeArticleAdapter);
+    }
+
+    @Override
+    public void initData() {
+
+        mCollectIpresenterCompl = new CollectIpresenterCompl(this);
+        mCollectIpresenterCompl.getCollectList(this, page);
     }
 }

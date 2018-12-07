@@ -1,8 +1,13 @@
 package com.dong.wanandroid.base;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.dong.wanandroid.model.event_bus_model.Event;
 import com.dong.wanandroid.util.EventBusUtil;
@@ -10,11 +15,16 @@ import com.dong.wanandroid.util.EventBusUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import butterknife.ButterKnife;
+
 /**
- * Created by Administrator on 2018/12/6.
+ * 抽象 Fragment 基类
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
+
+    private Activity mActivity;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +33,58 @@ public class BaseFragment extends Fragment {
         }
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (getContentViewLayoutID() != 0) {
+            return inflater.inflate(getContentViewLayoutID(), null);
+        } else {
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this,view);
+        initViewsAndEvents(view);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initPrepare();
+    }
+
+    private void initPrepare(){
+        mActivity = getActivity();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            onUserVisible();
+        } else {
+            onUserInvisible();
+        }
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        onPreDestroyView();
+        super.onDestroyView();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (isRegisterEventBus()) {
+            EventBusUtil.unregister(this);
+        }
+    }
     /**
      * 是否注册事件分发
      *
@@ -51,24 +113,49 @@ public class BaseFragment extends Fragment {
      *
      * @param event 事件
      */
-    protected void receiveEvent(Event event) {
-
-    }
+    protected void receiveEvent(Event event) {}
 
     /**
      * 接受到分发的粘性事件
      *
      * @param event 粘性事件
      */
-    protected void receiveStickyEvent(Event event) {
+    protected void receiveStickyEvent(Event event) {}
 
+    protected abstract int getContentViewLayoutID();
+    protected abstract void initViewsAndEvents(View view);
+    protected abstract void onUserVisible();
+    protected abstract void onUserInvisible();
+    protected abstract void onPreDestroyView();
+
+    /**
+     * 打开一个Activity 默认 不关闭当前activity
+     */
+    public void gotoActivity(Class<?> clz) {
+        gotoActivity(clz, false, null);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (isRegisterEventBus()) {
-            EventBusUtil.unregister(this);
+    /**
+     * 打开一个 Activity
+     * @param clz
+     * @param isCloseCurrentActivity 是否关闭当前 Activity
+     */
+    public void gotoActivity(Class<?> clz, boolean isCloseCurrentActivity) {
+        gotoActivity(clz, isCloseCurrentActivity, null);
+    }
+
+    /**
+     * 跳转页面
+     * @param clz
+     * @param isCloseCurrentActivity
+     * @param ex
+     */
+    private void gotoActivity(Class<?> clz, boolean isCloseCurrentActivity, Bundle ex) {
+        Intent intent = new Intent(mActivity, clz);
+        if (ex != null) intent.putExtras(ex);
+        startActivity(intent);
+        if (isCloseCurrentActivity) {
+            mActivity.finish();
         }
     }
 }
