@@ -17,7 +17,7 @@ import com.dong.wanandroid.model.user.UserModel;
 import com.dong.wanandroid.presenter.login.IPresenter;
 import com.dong.wanandroid.presenter.login.IpresenterCompl;
 import com.dong.wanandroid.ui.activity.register.RegisterActivity;
-import com.dong.wanandroid.util.EventBusUtil;
+import com.dong.wanandroid.util.third_lib.EventBusUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;

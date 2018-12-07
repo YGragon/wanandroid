@@ -1,37 +1,34 @@
 package com.dong.wanandroid.ui.fragment.welfare;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dong.wanandroid.R;
+import com.dong.wanandroid.base.BaseFragment;
 import com.dong.wanandroid.constant.ApiParamConstant;
 import com.dong.wanandroid.model.welfare.WelfareModel;
 import com.dong.wanandroid.presenter.welfare.WelfareIpresenter;
 import com.dong.wanandroid.presenter.welfare.WelfareIpresenterCompl;
-import com.dong.wanandroid.util.tool.GridSpacingItemDecoration;
 import com.dong.wanandroid.ui.adapter.WelfareAdapter;
 import com.dong.wanandroid.util.ReplaceClickUtils;
+import com.dong.wanandroid.util.tool.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WelfareFragment extends Fragment implements WelfareIView {
+public class WelfareFragment extends BaseFragment implements WelfareIView {
 
     private static final String TAG = "WelfareFragment";
     private static WelfareFragment sMWelfareFragment = null;
@@ -48,25 +45,18 @@ public class WelfareFragment extends Fragment implements WelfareIView {
     private ArrayList<WelfareModel> mWelfareModels= new ArrayList<>();
     private WelfareIpresenter mWelfareIpresenter;
 
-    public WelfareFragment() {
-    }
-
-    public static WelfareFragment getInstance() {
-        synchronized (WelfareFragment.class) {
-            if (sMWelfareFragment == null) {
-                sMWelfareFragment = new WelfareFragment();
-            }
-        }
-        return sMWelfareFragment;
-    }
-
+    public WelfareFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_welfare, container, false);
-        unbinder = ButterKnife.bind(this, view);
+    protected int getContentViewLayoutID() {
+        return R.layout.fragment_welfare;
+    }
 
+    @Override
+    protected void initViewsAndEvents(View view) {}
+
+    @Override
+    protected void initData() {
         mWelfareIpresenter = new WelfareIpresenterCompl(this);
         mWelfareIpresenter.getWelfareData(getActivity(), ApiParamConstant.WELFARE,size,page);
 
@@ -76,15 +66,16 @@ public class WelfareFragment extends Fragment implements WelfareIView {
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, DensityUtil.dp2px(9),true));
         mRecyclerView.setAdapter(mWelfareAdapter);
-
-        return view;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
+    protected void onUserVisible() {}
+
+    @Override
+    protected void onUserInvisible() {}
+
+    @Override
+    protected void onPreDestroyView() {}
 
     @Override
     public void showLoadingView() {

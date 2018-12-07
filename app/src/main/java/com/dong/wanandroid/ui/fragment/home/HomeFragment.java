@@ -1,20 +1,19 @@
 package com.dong.wanandroid.ui.fragment.home;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dong.wanandroid.R;
+import com.dong.wanandroid.base.BaseFragment;
 import com.dong.wanandroid.model.home.HomeArticleModel;
 import com.dong.wanandroid.presenter.home.HomeIPresenter;
 import com.dong.wanandroid.presenter.home.HomeIPresenterCompl;
@@ -28,17 +27,15 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements HomeIView{
+public class HomeFragment extends BaseFragment implements HomeIView{
     private static final String TAG = "HomeFragment";
     private static HomeFragment mHomeFragment = null;
 
-    Unbinder unbinder;
+
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.loading_progress)
@@ -64,24 +61,13 @@ public class HomeFragment extends Fragment implements HomeIView{
 
     public HomeFragment() { }
 
-    public static HomeFragment getInstance() {
-        synchronized (HomeFragment.class) {
-            if (mHomeFragment == null) {
-                mHomeFragment = new HomeFragment();
-            }
-        }
-        return mHomeFragment;
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.fragment_home;
     }
 
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        unbinder = ButterKnife.bind(this, view);
-
-
+    protected void initViewsAndEvents(View view) {
         // HeadView
         mBannerHeadView = LayoutInflater.from(getContext()).inflate(R.layout.home_head_banner_layout, null);
         mBanner = mBannerHeadView.findViewById(R.id.banner);
@@ -106,16 +92,18 @@ public class HomeFragment extends Fragment implements HomeIView{
         mHomeArticleAdapter = new HomeArticleAdapter(R.layout.home_article_item, homeArticleModels);
         recyclerView.setLayoutManager(mLinearLayoutManager);
         recyclerView.setAdapter(mHomeArticleAdapter);
+        // add HeadView
+        mHomeArticleAdapter.addHeaderView(mBannerHeadView) ;
+        mHomeArticleAdapter.addHeaderView(mHeadView) ;
 
+    }
 
+    @Override
+    protected void initData() {
         homeIPresenter = new HomeIPresenterCompl(this);
         homeIPresenter.getBannerData(getActivity());
         funcTitles = homeIPresenter.getFuncData();
         homeIPresenter.getHomeArticleList(getActivity(),page);
-
-        // add HeadView
-        mHomeArticleAdapter.addHeaderView(mBannerHeadView) ;
-        mHomeArticleAdapter.addHeaderView(mHeadView) ;
 
         // 加载更多
         mHomeArticleAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -140,6 +128,9 @@ public class HomeFragment extends Fragment implements HomeIView{
             }
         }, recyclerView);
 
+        /**
+         * 点击事件
+         */
         mHomeArticleAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -154,15 +145,16 @@ public class HomeFragment extends Fragment implements HomeIView{
                 }
             }
         });
-
-        return view;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
+    protected void onUserVisible() {}
+
+    @Override
+    protected void onUserInvisible() {}
+
+    @Override
+    protected void onPreDestroyView() {}
 
     @Override
     public void showLoadingView() {

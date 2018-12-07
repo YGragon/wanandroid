@@ -10,12 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dong.wanandroid.model.event_bus_model.Event;
-import com.dong.wanandroid.util.EventBusUtil;
+import com.dong.wanandroid.util.third_lib.EventBusUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 抽象 Fragment 基类
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
 
+    private Unbinder unbinder;
     private Activity mActivity;
 
     @Override
@@ -46,8 +48,9 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
+        unbinder = ButterKnife.bind(this, view);
         initViewsAndEvents(view);
+        initData();
     }
 
     @Override
@@ -81,6 +84,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        unbinder.unbind();
         if (isRegisterEventBus()) {
             EventBusUtil.unregister(this);
         }
@@ -124,6 +128,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getContentViewLayoutID();
     protected abstract void initViewsAndEvents(View view);
+    protected abstract void initData();
     protected abstract void onUserVisible();
     protected abstract void onUserInvisible();
     protected abstract void onPreDestroyView();

@@ -29,11 +29,6 @@ import com.dong.wanandroid.BaseApplication;
 
 import java.lang.reflect.Field;
 
-/**
- * <pre>
- *     desc  : utils about sToast
- * </pre>
- */
 public final class ToastUtils {
 
     private static final int     COLOR_DEFAULT = 0xFEFFFFFF;

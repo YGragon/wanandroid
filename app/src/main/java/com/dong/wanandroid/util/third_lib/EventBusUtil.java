@@ -1,12 +1,9 @@
-package com.dong.wanandroid.util;
+package com.dong.wanandroid.util.third_lib;
 
 import com.dong.wanandroid.model.event_bus_model.Event;
 
 import org.greenrobot.eventbus.EventBus;
 
-/**
- * Created by Administrator on 2018/12/6.
- */
 
 public class EventBusUtil {
     public static void register(Object subscriber) {

@@ -15,11 +15,7 @@ import com.dong.wanandroid.BaseApplication;
 
 import java.lang.reflect.Field;
 
-/**
- * <pre>
- *     desc  : utils about keyboard
- * </pre>
- */
+
 public final class KeyboardUtils {
 
     private static int                        sContentViewInvisibleHeightPre;

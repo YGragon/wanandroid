@@ -40,18 +40,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-/**
-<<<<<<< HEAD
- * 日志工具类
-=======
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/09/21
- *     desc  : utils about log
- * </pre>
->>>>>>> f010e1bb5ca8da74bb75805e978bfa6668cb7482
- */
 public final class LogUtils {
 
     public static final int V = Log.VERBOSE;

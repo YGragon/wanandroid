@@ -42,7 +42,6 @@ public class MePresenterComple implements MeIPresenter {
                 mMeIView.showUserLogin(userFromDb.get(0).getUsername());
             }
         } else {
-            LogUtils.eTag("222","清空数据");
             mMeIView.showUserUnLogin();
             // 清空数据
             DBHelper.clearReadRecordFromDb();

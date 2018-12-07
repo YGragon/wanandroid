@@ -1,7 +1,6 @@
 package com.dong.wanandroid.ui.fragment.me;
 
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomSheetBehavior;
@@ -12,31 +11,26 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.dong.wanandroid.R;
+import com.dong.wanandroid.base.BaseFragment;
 import com.dong.wanandroid.db.DBHelper;
-import com.dong.wanandroid.model.event_bus_model.UserEvent;
+import com.dong.wanandroid.model.event_bus_model.Event;
 import com.dong.wanandroid.model.read_record.ReadRecordModel;
+import com.dong.wanandroid.model.user.UserModel;
 import com.dong.wanandroid.presenter.me.MePresenterComple;
-import com.dong.wanandroid.util.tool.AppBarStateChangeListener;
 import com.dong.wanandroid.ui.adapter.RecordAdapter;
 import com.dong.wanandroid.util.LogUtils;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.dong.wanandroid.util.tool.AppBarStateChangeListener;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,7 +39,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MeFragment extends Fragment implements MeIView {
+public class MeFragment extends BaseFragment implements MeIView {
 
     private static final String TAG = "MeFragment";
     @BindView(R.id.me_fragment_top_bg_image)
@@ -72,44 +66,18 @@ public class MeFragment extends Fragment implements MeIView {
 
     private MePresenterComple mMePresenterComple;
 
-
     public MeFragment() {}
 
-    private static MeFragment mMeFragment = null;
-
-    public static MeFragment getInstance() {
-        synchronized (MeFragment.class) {
-            if (mMeFragment == null) {
-                mMeFragment = new MeFragment();
-            }
-        }
-        return mMeFragment;
+    @Override
+    protected boolean isRegisterEventBus() {
+        return true;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_me, container, false);
-        unbinder = ButterKnife.bind(this, view);
-
-        mMePresenterComple = new MePresenterComple(this);
-        mMePresenterComple.judgeShowName(getContext());
-
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                if (state == State.COLLAPSED){
-                    mToolbarLayout.setCollapsedTitleGravity(Gravity.CENTER);
-                    mToolbarLayout.setTitle("你还未登录哟");
-                }else if (state == State.EXPANDED){
-                    mToolbarLayout.setTitle("你还未登录哟");
-                    mToolbarLayout.setExpandedTitleGravity(Gravity.CENTER);
-                }else {
-
-                }
-            }
-        });
-
-        return view;
+    protected void receiveEvent(Event event) {
+        super.receiveEvent(event);
+        UserModel userModel = (UserModel) event.getData();
+        showUserLogin(userModel.getUsername());
     }
 
 
@@ -184,26 +152,50 @@ public class MeFragment extends Fragment implements MeIView {
         }
     }
 
+
     @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
+    protected int getContentViewLayoutID() {
+        return R.layout.fragment_me;
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
+    protected void initViewsAndEvents(View view) {
 
-    @Subscribe (threadMode = ThreadMode.MAIN,sticky = true)
-    public void onMessageEvent(UserEvent event){
-        showUserLogin(event.mUserModel.getUsername());
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    protected void initData() {
+        mMePresenterComple = new MePresenterComple(this);
+        mMePresenterComple.judgeShowName(getContext());
+
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                if (state == State.COLLAPSED){
+                    mToolbarLayout.setCollapsedTitleGravity(Gravity.CENTER);
+                    mToolbarLayout.setTitle("你还未登录哟");
+                }else if (state == State.EXPANDED){
+                    mToolbarLayout.setTitle("你还未登录哟");
+                    mToolbarLayout.setExpandedTitleGravity(Gravity.CENTER);
+                }else {
+
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onUserVisible() {
+
+    }
+
+    @Override
+    protected void onUserInvisible() {
+
+    }
+
+    @Override
+    protected void onPreDestroyView() {
+
     }
 }

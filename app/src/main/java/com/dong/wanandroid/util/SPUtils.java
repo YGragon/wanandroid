@@ -1,8 +1,5 @@
 package com.dong.wanandroid.util;
 
-/**
- * Created by macmini002 on 18/2/28.
- */
 
 import android.content.Context;
 import android.content.SharedPreferences;

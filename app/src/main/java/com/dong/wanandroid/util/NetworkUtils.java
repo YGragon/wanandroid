@@ -24,11 +24,6 @@ import static android.Manifest.permission.CHANGE_WIFI_STATE;
 import static android.Manifest.permission.INTERNET;
 import static android.Manifest.permission.MODIFY_PHONE_STATE;
 
-/**
- * <pre>
- *     desc  : utils about network
- * </pre>
- */
 public final class NetworkUtils {
 
     private NetworkUtils() {

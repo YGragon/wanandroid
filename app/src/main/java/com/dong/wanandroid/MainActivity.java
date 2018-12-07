@@ -43,10 +43,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        homeFragment = HomeFragment.getInstance();
-        mWelfareFragment = WelfareFragment.getInstance();
-        projectFragment = ProjectFragment.getInstance();
-        meFragment = MeFragment.getInstance();
+        homeFragment = new HomeFragment();
+        mWelfareFragment = new WelfareFragment();
+        projectFragment = new ProjectFragment();
+        meFragment = new MeFragment();
     }
 
     @Override
