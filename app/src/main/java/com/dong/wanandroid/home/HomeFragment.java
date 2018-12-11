@@ -14,7 +14,9 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseFragment;
+import com.dong.wanandroid.data.home.DaggerHomeRepositoryInter;
 import com.dong.wanandroid.data.home.HomeArticleModel;
+import com.dong.wanandroid.util.NotNullUtil;
 import com.dong.wanandroid.util.ReplaceClickUtils;
 import com.dong.wanandroid.util.tool.GlideImageLoader;
 import com.youth.banner.Banner;
@@ -27,16 +29,16 @@ import butterknife.BindView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends BaseFragment implements HomeIView{
+public class HomeFragment extends BaseFragment implements HomeContract.View{
     private static final String TAG = "HomeFragment";
-    private static HomeFragment mHomeFragment = null;
-
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.loading_progress)
     ProgressBar loadingView;
 
+    private HomeContract.Presenter mPresenter;
+    
     private ArrayList<String> funcTitles = new ArrayList<>() ;
     private ArrayList<HomeArticleModel> homeArticleModels= new ArrayList<>();
 
@@ -48,7 +50,6 @@ public class HomeFragment extends BaseFragment implements HomeIView{
     private View mHeadView;
     private int mCurrentCounter;
 
-    private HomeIPresenter homeIPresenter;
     private HomeFuncGridViewAdapter homeFuncGridViewAdapter;
     private View mBannerHeadView;
     private Banner mBanner;
@@ -71,7 +72,7 @@ public class HomeFragment extends BaseFragment implements HomeIView{
         searchLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homeIPresenter.toSearchAc(getActivity());
+                mPresenter.toSearchAc(getActivity());
             }
         });
 
@@ -92,14 +93,15 @@ public class HomeFragment extends BaseFragment implements HomeIView{
         mHomeArticleAdapter.addHeaderView(mBannerHeadView) ;
         mHomeArticleAdapter.addHeaderView(mHeadView) ;
 
+        // 设置给 presenter
+        mPresenter = new HomeIPresenterCompl(DaggerHomeRepositoryInter.create().getHomeRepository(),this);
     }
 
     @Override
     protected void initData() {
-        homeIPresenter = new HomeIPresenterCompl(this);
-        homeIPresenter.getBannerData(getActivity());
-        funcTitles = homeIPresenter.getFuncData();
-        homeIPresenter.getHomeArticleList(getActivity(),page);
+        mPresenter.getBannerData(getActivity());
+        funcTitles = mPresenter.getFuncData();
+        mPresenter.getHomeArticleList(getActivity(),page);
 
         // 加载更多
         mHomeArticleAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -115,7 +117,7 @@ public class HomeFragment extends BaseFragment implements HomeIView{
                             //成功获取更多数据
                             Log.e(TAG, "run: 加载更多");
                             page++;
-                            homeIPresenter.getHomeArticleList(getActivity(),page);
+                            mPresenter.getHomeArticleList(getActivity(),page);
                             mHomeArticleAdapter.loadMoreComplete();
                         }
                     }
@@ -132,8 +134,8 @@ public class HomeFragment extends BaseFragment implements HomeIView{
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 if (!ReplaceClickUtils.isFastClick()){
-                    homeIPresenter.saveReadRecordToDb(homeArticleModels.get(position));
-                    homeIPresenter.toBrowserAc(getActivity(),
+                    mPresenter.saveReadRecordToDb(homeArticleModels.get(position));
+                    mPresenter.toBrowserAc(getActivity(),
                             homeArticleModels.get(position).getLink(),
                             homeArticleModels.get(position).getId(),
                             homeArticleModels.get(position).getTitle(),
@@ -174,7 +176,7 @@ public class HomeFragment extends BaseFragment implements HomeIView{
             @Override
             public void OnBannerClick(int position) {
                 // banner 默认不传
-                homeIPresenter.toBrowserAc(getActivity(),url.get(position),0,"","");
+                mPresenter.toBrowserAc(getActivity(),url.get(position),0,"","");
             }
         });
 
@@ -195,4 +197,8 @@ public class HomeFragment extends BaseFragment implements HomeIView{
         mHomeArticleAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void setPresenter(HomeContract.Presenter presenter) {
+        mPresenter = NotNullUtil.checkNotNull(presenter);
+    }
 }

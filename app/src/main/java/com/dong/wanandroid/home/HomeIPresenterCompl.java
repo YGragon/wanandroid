@@ -2,149 +2,69 @@ package com.dong.wanandroid.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
-import com.dong.wanandroid.data.banner.Banner;
-import com.dong.wanandroid.data.banner.BannerList;
-import com.dong.wanandroid.base.BasePresenter;
-import com.dong.wanandroid.http.ApiConstant;
+import com.dong.wanandroid.browser.BrowserActivity;
 import com.dong.wanandroid.data.db.DBHelper;
-import com.dong.wanandroid.http.ApiService;
-import com.dong.wanandroid.http.RetrofitHelper;
-import com.dong.wanandroid.data.home.HomeArticleList;
 import com.dong.wanandroid.data.home.HomeArticleModel;
+import com.dong.wanandroid.data.home.HomeDataSource;
+import com.dong.wanandroid.data.home.HomeRepository;
 import com.dong.wanandroid.data.read_record.ReadRecordModel;
 import com.dong.wanandroid.search.SearchActivity;
-import com.dong.wanandroid.browser.BrowserActivity;
-import com.dong.wanandroid.util.NetworkUtils;
+import com.dong.wanandroid.util.NotNullUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by macmini002 on 18/3/1.
  */
 
-public class HomeIPresenterCompl extends BasePresenter<HomeIView> implements HomeIPresenter {
+public class HomeIPresenterCompl implements HomeContract.Presenter {
     private static final String TAG = "HomeIPresenterCompl";
-    private HomeIView homeIView;
+    private final HomeRepository mHomeRepository;
 
-    private List<Banner> bannerLists = new ArrayList<>() ;
-    private ArrayList<String> funcTitles = new ArrayList<>() ;
-    private ArrayList<String> images = new ArrayList<>() ;
-    private ArrayList<String> url = new ArrayList<>() ;
-    private ArrayList<HomeArticleModel> mHomeArticleModels = new ArrayList<>() ;
-    private int mTotal;
+    private final HomeContract.View mHomeView;
 
-    public HomeIPresenterCompl(HomeIView homeIView) {
-        this.homeIView = homeIView ;
+    public HomeIPresenterCompl(@NonNull HomeRepository homeRepository, @NonNull HomeContract.View homeView) {
+        mHomeRepository = NotNullUtil.checkNotNull(homeRepository);
+        mHomeView = NotNullUtil.checkNotNull(homeView);
+
+        mHomeView.setPresenter(this);
     }
 
     @Override
     public ArrayList<String> getFuncData() {
-        funcTitles.clear();
-        funcTitles.add("常用网址");
-        funcTitles.add("体系");
-        funcTitles.add("导航");
-        funcTitles.add("项目");
-        return funcTitles ;
+
+        return mHomeRepository.getFuncData();
     }
 
     @Override
     public void getBannerData(Context context) {
-        if (NetworkUtils.isConnected()){
-            bannerLists.clear();
-            RetrofitHelper.getInstance(context).create(ApiService.class, ApiConstant.BASE_URL_WAN_ANDROID)
-                    .getBanner()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<BannerList>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-                        }
-
-                        @Override
-                        public void onNext(BannerList bannerList) {
-                            bannerLists = bannerList.getData();
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                        }
-
-                        @Override
-                        public void onComplete() {
-                            DBHelper.setBannerToDb(bannerLists);
-                            images.clear();
-                            url.clear();
-                            for (int i = 0; i < bannerLists.size(); i++) {
-                                images.add(bannerLists.get(i).getImagePath());
-                                url.add(bannerLists.get(i).getUrl());
-                            }
-                            homeIView.showBanner(images,url);
-                        }
-
-
-                    });
-        }else {
-            bannerLists.clear();
-            images.clear();
-            url.clear();
-            List<Banner> bannerFromDb = DBHelper.getBannerFromDb();
-            bannerLists.addAll(bannerFromDb) ;
-            if (bannerLists.size() > 0){
-                for (int i = 0; i < bannerLists.size(); i++) {
-                    images.add(bannerLists.get(i).getImagePath());
-                    url.add(bannerLists.get(i).getUrl());
-                }
-                homeIView.showBanner(images,url);
+        mHomeRepository.getBannerData(context, new HomeDataSource.LoadBannersCallback() {
+            @Override
+            public void onBannerLoaded(ArrayList<String> images, ArrayList<String> urls) {
+                mHomeView.showBanner(images,urls);
             }
-        }
 
+            @Override
+            public void onBannerNotAvailable() {}
+        });
     }
 
     @Override
     public void getHomeArticleList(Context context, int page) {
-        if (NetworkUtils.isConnected()){
-            homeIView.showLoadingView();
-            RetrofitHelper.getInstance(context).create(ApiService.class, ApiConstant.BASE_URL_WAN_ANDROID)
-                    .getHomeArticleList(page)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<HomeArticleList>() {
-                        @Override
-                        public void onSubscribe(Disposable d) { }
-
-                        @Override
-                        public void onNext(HomeArticleList homeArticleList) {
-                            mTotal = homeArticleList.getData().getTotal();
-                            mHomeArticleModels.addAll(homeArticleList.getData().getDatas()) ;
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                        }
-
-                        @Override
-                        public void onComplete() {
-                            DBHelper.setArticleToDb(mHomeArticleModels);
-                            homeIView.showHomeArticleList(mHomeArticleModels,mTotal);
-                            homeIView.hideLoadingView();
-                        }
-
-                    });
-        }else {
-            homeIView.showLoadingView();
-            mHomeArticleModels.clear();
-            List<HomeArticleModel> articleFromDb = DBHelper.getArticleFromDb();
-            mHomeArticleModels.addAll(articleFromDb) ;
-            homeIView.showHomeArticleList(mHomeArticleModels,mHomeArticleModels.size());
-            homeIView.hideLoadingView();
-        }
+        mHomeView.showLoadingView();
+        mHomeRepository.getHomeArticleList(context, page, new HomeDataSource.GetHomeArticleCallback() {
+            @Override
+            public void onHomeArticleLoaded(ArrayList<HomeArticleModel> homeArticleModels, int totalCount) {
+                mHomeView.showHomeArticleList(homeArticleModels,totalCount);
+                mHomeView.hideLoadingView();
+            }
+            @Override
+            public void onHomeArticleNotAvailable() {
+             }
+        });
     }
 
     @Override
@@ -192,4 +112,8 @@ public class HomeIPresenterCompl extends BasePresenter<HomeIView> implements Hom
         return readRecordFromDb ;
     }
 
+    @Override
+    public void start() {
+
+    }
 }
