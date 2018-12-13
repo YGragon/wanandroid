@@ -18,6 +18,8 @@ public class HomeArticleAdapter extends BaseQuickAdapter<HomeArticleModel, BaseV
 
     @Override
     protected void convert(BaseViewHolder helper, HomeArticleModel item) {
-        helper.setText(R.id.home_article_content_tv, item.getTitle());
+        helper.setText(R.id.tv_home_article_content, item.getTitle());
+        helper.setText(R.id.tv_home_author_name, item.getAuthor());
+        helper.setText(R.id.tv_home_publish_time, item.getNiceDate());
     }
 }

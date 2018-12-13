@@ -3,12 +3,77 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/home_article_content_tv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14sp"
-        android:layout_marginEnd="14sp"
-        android:padding="10dp"
-        android:textSize="@dimen/home_article_item_content_text_size"/>
+        android:orientation="vertical"
+        android:layout_margin="6dp"
+        android:background="@drawable/shape_home_item_bg">
+        <TextView
+            android:id="@+id/tv_home_article_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:layout_marginStart="14sp"
+            android:layout_marginEnd="14sp"
+            android:letterSpacing="0.05"
+            android:lineSpacingExtra="5dp"
+            android:text="你好呀"
+            android:textSize="@dimen/home_article_item_content_text_size"
+            android:textColor="#333333"
+            android:textStyle="bold"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#EFEFE4"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:layout_gravity="center_vertical"
+            android:layout_below="@+id/tv_home_article_content">
+            <TextView
+                android:id="@+id/tv_home_author_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="鸿洋"
+                android:textSize="12sp"
+                android:textColor="#8E8E93"
+                android:background="@drawable/shape_author_name"/>
+
+            <TextView
+                android:id="@+id/tv_home_publish_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="2018-11-11"
+                android:textSize="12sp"
+                android:textColor="#999999"
+                android:background="@drawable/shape_publish_time"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:visibility="gone"
+            android:background="#EFEFE4"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+    </LinearLayout>
+
 </LinearLayout>

@@ -20,6 +20,6 @@ public class SearchAdapter extends BaseQuickAdapter<HomeArticleModel, BaseViewHo
 
     @Override
     protected void convert(BaseViewHolder helper, HomeArticleModel item) {
-        helper.setText(R.id.home_article_content_tv, Html.fromHtml(item.getTitle()));
+        helper.setText(R.id.tv_home_article_content, Html.fromHtml(item.getTitle()));
     }
 }
