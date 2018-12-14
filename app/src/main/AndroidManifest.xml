@@ -43,10 +43,13 @@
             android:theme="@style/ActivityTheme" />
         <activity
             android:name=".big_image.BigImageActivity"
-            android:theme="@style/ActivityTheme" />
+            android:theme="@style/BigImageTranslateTheme" />
 
-        <activity android:name=".collect.CollectListActivity" />
-        <activity android:name=".gank.FlowActivity" />
+        <activity android:name=".collect.CollectListActivity"
+                  android:theme="@style/ActivityTheme"/>
+
+        <activity android:name=".gank.FlowActivity"
+                  android:theme="@style/ActivityTheme"/>
     </application>
 
 </manifest>

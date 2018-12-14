@@ -4,8 +4,9 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
     <ImageView
-        android:id="@+id/welfare_item_iv"
+        android:id="@+id/iv_grid_welfare"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:transitionName="@string/share_pic_str"/>
 </LinearLayout>

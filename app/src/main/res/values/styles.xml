@@ -10,14 +10,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <!-- Base application theme. -->
-    <style name="ActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="ActivityTheme" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
+    </style>
+    <!--转场动画-->
+    <style name="BigImageTranslateTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
     <style name="anim_menu_bottombar">
         <item name="android:windowEnterAnimation">@anim/menu_bottombar_in</item>

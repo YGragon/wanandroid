@@ -22,6 +22,6 @@ public class WelfareAdapter extends BaseQuickAdapter<WelfareModel,BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder helper, WelfareModel item) {
-        Glide.with(mContext).load(item.getUrl()).crossFade().into((ImageView) helper.getView(R.id.welfare_item_iv));
+        Glide.with(mContext).load(item.getUrl()).crossFade().into((ImageView) helper.getView(R.id.iv_grid_welfare));
     }
 }

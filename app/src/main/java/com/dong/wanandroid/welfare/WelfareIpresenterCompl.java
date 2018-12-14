@@ -1,22 +1,25 @@
 package com.dong.wanandroid.welfare;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.widget.ImageView;
 
+import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BasePresenter;
+import com.dong.wanandroid.big_image.BigImageActivity;
+import com.dong.wanandroid.data.AppConfig;
+import com.dong.wanandroid.data.welfare.WelfareList;
+import com.dong.wanandroid.data.welfare.WelfareModel;
 import com.dong.wanandroid.http.ApiConstant;
 import com.dong.wanandroid.http.ApiService;
 import com.dong.wanandroid.http.RetrofitHelper;
-import com.dong.wanandroid.data.welfare.WelfareList;
-import com.dong.wanandroid.data.welfare.WelfareModel;
-import com.dong.wanandroid.big_image.BigImageActivity;
 
 import java.util.ArrayList;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -29,8 +32,6 @@ public class WelfareIpresenterCompl extends BasePresenter<WelfareIView> implemen
     private ArrayList<WelfareModel> mWelfareModels = new ArrayList<>() ;
     private ArrayList<String> images = new ArrayList<>() ;
 
-    private int mPage ;
-    private int mSize ;
 
     public WelfareIpresenterCompl(WelfareIView welfareIView) {
         this.mWelfareIView = welfareIView ;
@@ -39,18 +40,13 @@ public class WelfareIpresenterCompl extends BasePresenter<WelfareIView> implemen
     @Override
     public void getWelfareData(Context context, String type, int size, int page) {
         mWelfareIView.showLoadingView();
-        mPage = page ;
-        mSize = size ;
         RetrofitHelper.getInstance(context).create(ApiService.class, ApiConstant.BASE_URL_GANK)
                 .getWelfareList(type, size, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<WelfareList>() {
+                .subscribe(new Consumer<WelfareList>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {}
-
-                    @Override
-                    public void onNext(@NonNull WelfareList welfareList) {
+                    public void accept(WelfareList welfareList) throws Exception {
                         mWelfareModels.clear();
                         images.clear();
                         mWelfareModels.addAll(welfareList.getResults()) ;
@@ -58,29 +54,21 @@ public class WelfareIpresenterCompl extends BasePresenter<WelfareIView> implemen
                         for (int i=0; i < mWelfareModels.size(); i++){
                             images.add(mWelfareModels.get(i).getUrl()) ;
                         }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) { }
-
-                    @Override
-                    public void onComplete() {
                         mWelfareIView.hideLoadingView();
                     }
                 });
     }
 
     @Override
-    public void toBigImageAc(Context context, int position, ArrayList<WelfareModel> welfareModelArrayList) {
+    public void toBigImageAc(Context context, ImageView shareImage, String imageUrl) {
         Intent intent = new Intent(context, BigImageActivity.class);
-        ArrayList<String> images = new ArrayList<>();
-        for (int j = 0; j < welfareModelArrayList.size(); j++) {
-            images.add(welfareModelArrayList.get(j).getUrl());
-        }
-        intent.putExtra("images", images);
-        intent.putExtra("position", position) ;
-        intent.putExtra("page", mPage) ;
-        intent.putExtra("size", mSize) ;
-        context.startActivity(intent);
+        intent.putExtra(AppConfig.IMAGE_URL,imageUrl);
+        context.startActivity(intent,
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        (Activity) context,
+                        shareImage,
+                        context.getString(R.string.share_pic_str))
+                .toBundle());
+
     }
 }

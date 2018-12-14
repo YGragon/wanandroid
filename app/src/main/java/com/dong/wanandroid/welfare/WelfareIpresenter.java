@@ -1,10 +1,7 @@
 package com.dong.wanandroid.welfare;
 
 import android.content.Context;
-
-import com.dong.wanandroid.data.welfare.WelfareModel;
-
-import java.util.ArrayList;
+import android.widget.ImageView;
 
 /**
  * Created by Administrator on 2018/3/1.
@@ -12,5 +9,5 @@ import java.util.ArrayList;
 
 public interface WelfareIpresenter {
     void getWelfareData(Context context, String type, int size, int page) ;
-    void toBigImageAc(Context context, int position, ArrayList<WelfareModel> mWelfareModels) ;
+    void toBigImageAc(Context context, ImageView shareImage, String imageUrl) ;
 }
