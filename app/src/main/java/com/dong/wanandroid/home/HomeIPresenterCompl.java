@@ -11,6 +11,7 @@ import com.dong.wanandroid.data.home.HomeDataSource;
 import com.dong.wanandroid.data.home.HomeRepository;
 import com.dong.wanandroid.data.read_record.ReadRecordModel;
 import com.dong.wanandroid.search.SearchActivity;
+import com.dong.wanandroid.util.LogUtils;
 import com.dong.wanandroid.util.NotNullUtil;
 
 import java.util.ArrayList;

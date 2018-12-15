@@ -2,27 +2,18 @@ package com.dong.wanandroid.browser;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseActivity;
-import com.dong.wanandroid.http.ApiConstant;
-import com.dong.wanandroid.data.home.HomeArticleBean;
-import com.dong.wanandroid.collect.CollectIpresenterCompl;
-import com.dong.wanandroid.collect.CollectIView;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.dong.wanandroid.util.ShareUtil;
 import com.just.agentweb.AgentWeb;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import okhttp3.Cookie;
 
 
-public class BrowserActivity extends BaseActivity implements CollectIView {
+public class BrowserActivity extends BaseActivity{
     private static final String TAG = "BrowserActivity";
     public final static String PARAM_URL = "param_url";
     public final static String PARAM_TITLE = "param_title";
@@ -36,24 +27,6 @@ public class BrowserActivity extends BaseActivity implements CollectIView {
     private int mId;
     private String mTitle;
     private String mAuthor;
-    private CollectIpresenterCompl mCollectIpresenterCompl;
-
-
-    @Override
-    public void showCollectResult(int resultCode, String errorMsg, int total, HomeArticleBean data) {
-        if (resultCode == 0) {
-            // 成功
-            Toast.makeText(BrowserActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
-        } else {
-            // 失败
-            Toast.makeText(BrowserActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void showGuideViewResult() {
-        Toast.makeText(this, "你很棒棒哟~", Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public int intiLayout() {
@@ -61,9 +34,7 @@ public class BrowserActivity extends BaseActivity implements CollectIView {
     }
 
     @Override
-    public void initView() {
-
-    }
+    public void initView() {}
 
     @Override
     public void initData() {
@@ -78,7 +49,6 @@ public class BrowserActivity extends BaseActivity implements CollectIView {
             return;
         }
 
-        mCollectIpresenterCompl = new CollectIpresenterCompl(this);
 
         AgentWeb.with(this)//传入Activity
                 .setAgentWebParent(mLinearlayout, new LinearLayout.LayoutParams(-1, -1))
@@ -91,21 +61,6 @@ public class BrowserActivity extends BaseActivity implements CollectIView {
 
     @OnClick(R.id.fab)
     public void onViewClicked() {
-        // TODO: 2018/3/18 判断cookie是否过期
-        SharedPrefsCookiePersistor cookiePersistor = new SharedPrefsCookiePersistor(BrowserActivity.this);
-        List<Cookie> cookies = cookiePersistor.loadAll();
-
-        if (cookies.size() > 0) {
-            // 存在cookie
-            if (mUrl.contains(ApiConstant.BASE_URL_WAN_ANDROID)) {
-                Log.e(TAG, "onClick: 站内文章");
-                mCollectIpresenterCompl.collectPostInSite(BrowserActivity.this, mId, mTitle, mAuthor, mUrl);
-            } else {
-                Log.e(TAG, "onClick: 站外文章");
-                mCollectIpresenterCompl.collectPostOutSite(BrowserActivity.this, mTitle, mAuthor, mUrl);
-            }
-        } else {
-            Toast.makeText(BrowserActivity.this, "你还未登录哟~", Toast.LENGTH_SHORT).show();
-        }
+        ShareUtil.getInstance(this).shareUrl(null,null,mUrl,mTitle,mAuthor);
     }
 }

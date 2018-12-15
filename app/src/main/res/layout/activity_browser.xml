@@ -19,6 +19,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         app:elevation="8dp"
-        android:src="@drawable/icon_like"/>
+        android:src="@drawable/share"/>
 
 </FrameLayout>

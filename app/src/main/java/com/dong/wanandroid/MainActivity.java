@@ -36,6 +36,12 @@ public class MainActivity extends BaseActivity {
     private FragmentManager fm;
     private FragmentTransaction ft;
 
+
+    @Override
+    public boolean isSupportSwipeBack() {
+        return false;
+    }
+
     @Override
     public int intiLayout() {
         return R.layout.activity_main;

@@ -8,5 +8,11 @@
     <color name="guide_bg_color_9e4891ff">#9e4891ff</color>
     <color name="dialog_sheet_record_bg">#FFFFFF</color>
     <color name="dialog_bg_translate">#00000000</color>
+    <color name="color_8b864e">#8B864E</color>
+    <color name="color_8b8378">#8B8378</color>
+    <color name="color_tab_home">#FFB6C1</color>
+    <color name="color_tab_welfare">#EE8262</color>
+    <color name="color_tab_me">#FFB90F</color>
+    <color name="color_tab_gank">#EEA9B8</color>
 
 </resources>
