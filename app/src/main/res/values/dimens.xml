@@ -7,4 +7,5 @@
     <dimen name="text_size_18sp">18sp</dimen>
     <dimen name="dialog_sheet_top_radius">16dp</dimen>
     <dimen name="dp200">200dp</dimen>
+    <dimen name="statusbar_view_height">0dp</dimen>
 </resources>

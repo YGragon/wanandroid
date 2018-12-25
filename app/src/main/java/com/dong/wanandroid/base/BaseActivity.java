@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.data.event_bus_model.Event;
 import com.dong.wanandroid.util.third_lib.EventBusUtil;
+import com.jaeger.library.StatusBarUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -36,6 +37,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         if (isRegisterEventBus()) {
             EventBusUtil.register(this);
         }
+        // 设置状态栏颜色
+        setStatusBar();
+    }
+    protected void setStatusBar() {
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
     }
 
     /**

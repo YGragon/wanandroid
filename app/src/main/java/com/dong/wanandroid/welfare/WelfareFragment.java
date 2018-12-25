@@ -1,11 +1,16 @@
 package com.dong.wanandroid.welfare;
 
 
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -36,9 +41,9 @@ public class WelfareFragment extends BaseFragment implements WelfareIView {
 
     private WelfareAdapter mWelfareAdapter;
     private GridLayoutManager mGridLayoutManager;
-    private int page = 1 ;
-    private int size = 10 ;
-    private ArrayList<WelfareModel> mWelfareModels= new ArrayList<>();
+    private int page = 1;
+    private int size = 10;
+    private ArrayList<WelfareModel> mWelfareModels = new ArrayList<>();
     private WelfareIpresenter mWelfareIpresenter;
 
     public WelfareFragment() {}
@@ -54,20 +59,20 @@ public class WelfareFragment extends BaseFragment implements WelfareIView {
     @Override
     protected void initData() {
         mWelfareIpresenter = new WelfareIpresenterCompl(this);
-        mWelfareIpresenter.getWelfareData(getActivity(), ApiParamConstant.WELFARE,size,page);
+        mWelfareIpresenter.getWelfareData(getActivity(), ApiParamConstant.WELFARE, size, page);
 
         // ItemView
-        mGridLayoutManager = new GridLayoutManager(getContext(),2);
+        mGridLayoutManager = new GridLayoutManager(getContext(), 2);
         mWelfareAdapter = new WelfareAdapter(R.layout.welfare_item, mWelfareModels);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
-        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, DensityUtil.dp2px(9),true));
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, DensityUtil.dp2px(9), true));
         mRecyclerView.setAdapter(mWelfareAdapter);
         mWelfareAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 page++;
                 //成功获取更多数据
-                mWelfareIpresenter.getWelfareData(getActivity(), ApiParamConstant.WELFARE ,size,page);
+                mWelfareIpresenter.getWelfareData(getActivity(), ApiParamConstant.WELFARE, size, page);
                 mWelfareAdapter.loadMoreComplete();
 
             }
@@ -76,8 +81,8 @@ public class WelfareFragment extends BaseFragment implements WelfareIView {
         mWelfareAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Log.e(TAG, "onItemClick: ===================" );
-                mWelfareIpresenter.toBigImageAc(getActivity(),(ImageView)view.findViewById(R.id.iv_grid_welfare), mWelfareModels.get(position).getUrl());
+                Log.e(TAG, "onItemClick: ===================");
+                mWelfareIpresenter.toBigImageAc(getActivity(), (ImageView) view.findViewById(R.id.iv_grid_welfare), mWelfareModels.get(position).getUrl());
             }
         });
     }
@@ -103,7 +108,7 @@ public class WelfareFragment extends BaseFragment implements WelfareIView {
 
     @Override
     public void showWelfareResult(ArrayList<WelfareModel> welfareModelArrayList) {
-        mWelfareModels.addAll(welfareModelArrayList) ;
+        mWelfareModels.addAll(welfareModelArrayList);
         mWelfareAdapter.notifyDataSetChanged();
     }
 

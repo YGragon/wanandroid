@@ -1,6 +1,9 @@
 package com.dong.wanandroid.me;
 
 
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomSheetBehavior;
@@ -10,10 +13,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -29,6 +36,7 @@ import com.dong.wanandroid.util.tool.AppBarStateChangeListener;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -48,8 +56,6 @@ public class MeFragment extends BaseFragment implements MeIView {
     AppBarLayout mAppBarLayout;
     @BindView(R.id.toolbar_layout)
     CollapsingToolbarLayout mToolbarLayout;
-    @BindView(R.id.layout_user_info)
-    LinearLayout mLayoutUserInfo;
     @BindView(R.id.my_collect_layout)
     LinearLayout mMyCollectLayout;
     @BindView(R.id.my_read_record_layout)
@@ -59,13 +65,65 @@ public class MeFragment extends BaseFragment implements MeIView {
 
     @BindView(R.id.layout_main)
     NestedScrollView mNestedScrollView;
-    Unbinder unbinder ;
+    @BindView(R.id.fake_status_bar)
+    View fakeStatusBar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
 
     private MePresenterComple mMePresenterComple;
 
-    public MeFragment() {}
+    public MeFragment() {
+    }
 
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.fragment_me;
+    }
+
+    @Override
+    protected void initViewsAndEvents(View view) {
+        setTvTitleBackgroundColor(Color.TRANSPARENT);
+    }
+
+    public void setTvTitleBackgroundColor(@ColorInt int color) {
+        fakeStatusBar.setBackgroundColor(color);
+    }
+
+    @Override
+    protected void initData() {
+        mMePresenterComple = new MePresenterComple(this);
+        mMePresenterComple.judgeShowName(getContext());
+
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                if (state == State.COLLAPSED) {
+                    mToolbarLayout.setCollapsedTitleGravity(Gravity.CENTER);
+                    mToolbarLayout.setTitle("你还未登录哟");
+                    mToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+                    setTvTitleBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                } else if (state == State.EXPANDED) {
+                    mToolbarLayout.setTitle("你还未登录哟");
+                    mToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+                    mToolbarLayout.setExpandedTitleGravity(Gravity.CENTER);
+                    setTvTitleBackgroundColor(Color.TRANSPARENT);
+                } else {
+                    mToolbarLayout.setTitle("哈哈哈哈");
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onUserVisible() {
+
+    }
+
+    @Override
+    protected void onUserInvisible() {
+
+    }
     @Override
     protected boolean isRegisterEventBus() {
         return true;
@@ -102,10 +160,10 @@ public class MeFragment extends BaseFragment implements MeIView {
 
     }
 
-    @OnClick({R.id.layout_user_info, R.id.my_collect_layout, R.id.my_read_record_layout,R.id.gank_layout})
+    @OnClick({R.id.profile_image, R.id.my_collect_layout, R.id.my_read_record_layout, R.id.gank_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.layout_user_info:
+            case R.id.profile_image:
                 mMePresenterComple.judgeToLoginAc(getContext());
                 break;
             case R.id.my_collect_layout:
@@ -116,9 +174,9 @@ public class MeFragment extends BaseFragment implements MeIView {
                 View sheetDialogView = getLayoutInflater().inflate(R.layout.dialog_sheet_record_layout, null);
                 sheetDialog.setContentView(sheetDialogView);
 
-                RecyclerView recordRecyclerView = sheetDialogView.findViewById(R.id.record_recycler_view) ;
+                RecyclerView recordRecyclerView = sheetDialogView.findViewById(R.id.record_recycler_view);
                 List<ReadRecordModel> readRecordFromDb = DBHelper.getReadRecordFromDb();
-                LogUtils.eTag("222","size---->"+readRecordFromDb.size());
+                LogUtils.eTag("222", "size---->" + readRecordFromDb.size());
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
                 recordRecyclerView.setLayoutManager(layoutManager);
                 RecordAdapter recordAdapter = new RecordAdapter(R.layout.item_recod_layout, readRecordFromDb);
@@ -132,11 +190,12 @@ public class MeFragment extends BaseFragment implements MeIView {
                 sheetBehavior.setPeekHeight(1600);
                 sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
                     @Override
-                    public void onStateChanged(@NonNull View bottomSheet, int newState) {}
+                    public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                    }
 
                     @Override
                     public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                        if (Math.abs(slideOffset) > 0.4){
+                        if (Math.abs(slideOffset) > 0.4) {
                             sheetDialog.dismiss();
                         }
                     }
@@ -150,47 +209,6 @@ public class MeFragment extends BaseFragment implements MeIView {
         }
     }
 
-
-    @Override
-    protected int getContentViewLayoutID() {
-        return R.layout.fragment_me;
-    }
-
-    @Override
-    protected void initViewsAndEvents(View view) {
-
-    }
-
-    @Override
-    protected void initData() {
-        mMePresenterComple = new MePresenterComple(this);
-        mMePresenterComple.judgeShowName(getContext());
-
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                if (state == State.COLLAPSED){
-                    mToolbarLayout.setCollapsedTitleGravity(Gravity.CENTER);
-                    mToolbarLayout.setTitle("你还未登录哟");
-                }else if (state == State.EXPANDED){
-                    mToolbarLayout.setTitle("你还未登录哟");
-                    mToolbarLayout.setExpandedTitleGravity(Gravity.CENTER);
-                }else {
-
-                }
-            }
-        });
-    }
-
-    @Override
-    protected void onUserVisible() {
-
-    }
-
-    @Override
-    protected void onUserInvisible() {
-
-    }
 
     @Override
     protected void onPreDestroyView() {

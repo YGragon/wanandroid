@@ -1,21 +1,24 @@
 package com.dong.wanandroid.home;
 
 
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.GridView;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseFragment;
-import com.dong.wanandroid.data.home.DaggerHomeRepositoryInter;
 import com.dong.wanandroid.data.home.HomeArticleModel;
+import com.dong.wanandroid.data.home.HomeRepository;
 import com.dong.wanandroid.util.NotNullUtil;
 import com.dong.wanandroid.util.ReplaceClickUtils;
 import com.dong.wanandroid.util.tool.GlideImageLoader;
@@ -25,36 +28,37 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends BaseFragment implements HomeContract.View{
+public class HomeFragment extends BaseFragment implements HomeContract.View {
     private static final String TAG = "HomeFragment";
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.loading_progress)
     ProgressBar loadingView;
+    @BindView(R.id.search_layout)
+    TextView searchLayout;
+    @BindView(R.id.banner)
+    Banner mBanner;
+    Unbinder unbinder;
+    @BindView(R.id.fake_status_bar)
+    View fakeStatusBar;
 
     private HomeContract.Presenter mPresenter;
-    
-    private ArrayList<String> funcTitles = new ArrayList<>() ;
-    private ArrayList<HomeArticleModel> homeArticleModels= new ArrayList<>();
 
-    private GridView mGridView;
+    private ArrayList<HomeArticleModel> homeArticleModels = new ArrayList<>();
 
-    private int page = 0 ;
+
+    private int page = 0;
     private HomeArticleAdapter mHomeArticleAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-    private View mHeadView;
     private int mCurrentCounter;
-
-    private HomeFuncGridViewAdapter homeFuncGridViewAdapter;
-    private View mBannerHeadView;
-    private Banner mBanner;
-    private TextView searchLayout;
-    private int totalCount = 0 ;
+    private int totalCount = 0;
 
     public HomeFragment() { }
 
@@ -65,43 +69,23 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     protected void initViewsAndEvents(View view) {
-        // HeadView
-        mBannerHeadView = LayoutInflater.from(getContext()).inflate(R.layout.home_head_banner_layout, null);
-        mBanner = mBannerHeadView.findViewById(R.id.banner);
-        searchLayout = mBannerHeadView.findViewById(R.id.search_layout);
-        searchLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.toSearchAc(getActivity());
-            }
-        });
 
-        // HeadView
-        mHeadView = LayoutInflater.from(getContext()).inflate(R.layout.home_head_func_layout, null);
-        mGridView = mHeadView.findViewById(R.id.grid_view);
-        homeFuncGridViewAdapter = new HomeFuncGridViewAdapter(getContext(), funcTitles);
-        mGridView.setAdapter(homeFuncGridViewAdapter);
-
-
-
+        // 透明顶部
+        setTvTitleBackgroundColor(Color.TRANSPARENT);
         // ItemView
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mHomeArticleAdapter = new HomeArticleAdapter(R.layout.home_article_item, homeArticleModels);
         recyclerView.setLayoutManager(mLinearLayoutManager);
         recyclerView.setAdapter(mHomeArticleAdapter);
-        // add HeadView
-        mHomeArticleAdapter.addHeaderView(mBannerHeadView) ;
-        mHomeArticleAdapter.addHeaderView(mHeadView) ;
 
         // 设置给 presenter
-        mPresenter = new HomeIPresenterCompl(DaggerHomeRepositoryInter.create().getHomeRepository(),this);
+        mPresenter = new HomeIPresenterCompl(new HomeRepository(), this);
     }
 
     @Override
     protected void initData() {
         mPresenter.getBannerData(getActivity());
-        funcTitles = mPresenter.getFuncData();
-        mPresenter.getHomeArticleList(getActivity(),page);
+        mPresenter.getHomeArticleList(getActivity(), page);
 
         // 加载更多
         mHomeArticleAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -113,11 +97,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
                         if (mCurrentCounter >= totalCount) {
                             //数据全部加载完毕
                             mHomeArticleAdapter.loadMoreEnd();
-                        } else{
+                        } else {
                             //成功获取更多数据
                             Log.e(TAG, "run: 加载更多");
                             page++;
-                            mPresenter.getHomeArticleList(getActivity(),page);
+                            mPresenter.getHomeArticleList(getActivity(), page);
                             mHomeArticleAdapter.loadMoreComplete();
                         }
                     }
@@ -133,7 +117,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-                if (!ReplaceClickUtils.isFastClick()){
+                if (!ReplaceClickUtils.isFastClick()) {
                     mPresenter.saveReadRecordToDb(homeArticleModels.get(position));
                     mPresenter.toBrowserAc(getActivity(),
                             homeArticleModels.get(position).getLink(),
@@ -146,13 +130,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
     }
 
     @Override
-    protected void onUserVisible() {}
+    protected void onUserVisible() {
+    }
 
     @Override
-    protected void onUserInvisible() {}
+    protected void onUserInvisible() {
+    }
 
     @Override
-    protected void onPreDestroyView() {}
+    protected void onPreDestroyView() {
+    }
 
     @Override
     public void showLoadingView() {
@@ -176,23 +163,21 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
             @Override
             public void OnBannerClick(int position) {
                 // banner 默认不传
-                mPresenter.toBrowserAc(getActivity(),url.get(position),0,"","");
+                mPresenter.toBrowserAc(getActivity(), url.get(position), 0, "", "");
             }
         });
 
     }
 
-    @Override
-    public void showFuncation(ArrayList<String> funcTitles) {
-        this.funcTitles = funcTitles ;
-        homeFuncGridViewAdapter.notifyDataSetChanged();
+    public void setTvTitleBackgroundColor(@ColorInt int color) {
+        fakeStatusBar.setBackgroundColor(color);
     }
 
     @Override
     public void showHomeArticleList(final ArrayList<HomeArticleModel> mHomeArticleModels, final int totalCount) {
         homeArticleModels.clear();
-        homeArticleModels.addAll(mHomeArticleModels) ;
-        this.totalCount = totalCount ;
+        homeArticleModels.addAll(mHomeArticleModels);
+        this.totalCount = totalCount;
         mCurrentCounter = mHomeArticleAdapter.getData().size();
         mHomeArticleAdapter.notifyDataSetChanged();
     }
@@ -200,5 +185,19 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
     @Override
     public void setPresenter(HomeContract.Presenter presenter) {
         mPresenter = NotNullUtil.checkNotNull(presenter);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

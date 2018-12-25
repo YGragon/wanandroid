@@ -13,7 +13,6 @@ import com.dong.wanandroid.util.NetworkUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -33,7 +32,6 @@ public class HomeRepository implements HomeDataSource {
     private int mTotal;
 
 
-    @Inject
     public HomeRepository() {}
 
     @Override

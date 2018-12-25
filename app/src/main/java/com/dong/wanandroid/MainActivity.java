@@ -1,18 +1,27 @@
 package com.dong.wanandroid;
 
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.dong.wanandroid.base.BaseActivity;
 import com.dong.wanandroid.home.HomeFragment;
 import com.dong.wanandroid.me.MeFragment;
 import com.dong.wanandroid.project.ProjectFragment;
+import com.dong.wanandroid.weiget.NoScrollHorizontally;
 import com.dong.wanandroid.welfare.WelfareFragment;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
+import com.jaeger.library.StatusBarUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -20,21 +29,13 @@ public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
 
-    @BindView(R.id.contentContainer)
-    FrameLayout contentContainer;
+    @BindView(R.id.view_pager)
+    NoScrollHorizontally mViewPager;
     @BindView(R.id.bottomBar)
-    BottomBar bottomBar;
-
-    //之前显示的fragment
-    private HomeFragment homeFragment;
-    private WelfareFragment mWelfareFragment;
-    private ProjectFragment projectFragment;
-    private MeFragment meFragment;
-    private Fragment mContent;
+    BottomNavigationView bottomBar;
 
 
-    private FragmentManager fm;
-    private FragmentTransaction ft;
+    private List<Fragment> fragmentList = new ArrayList<>();
 
 
     @Override
@@ -49,66 +50,50 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        homeFragment = new HomeFragment();
-        mWelfareFragment = new WelfareFragment();
-        projectFragment = new ProjectFragment();
-        meFragment = new MeFragment();
+        fragmentList.add(new HomeFragment());
+        fragmentList.add(new WelfareFragment());
+        fragmentList.add(new ProjectFragment());
+        fragmentList.add(new MeFragment());
+
+        BottomAdapter bottomAdapter = new BottomAdapter(getSupportFragmentManager(), fragmentList);
+        mViewPager.setAdapter(bottomAdapter);
+        mViewPager.setOffscreenPageLimit(fragmentList.size());
     }
 
     @Override
     public void initData() {
-        setDefaultFragment(homeFragment);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onTabSelected(@IdRes int tabId) {
-                switch (tabId) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
                     case R.id.tab_home:
-                        switchContent(homeFragment);
-                        break;
+                        mViewPager.setCurrentItem(0);
+                        return true;
                     case R.id.tab_welfare:
-                        switchContent(mWelfareFragment);
-                        break;
+                        mViewPager.setCurrentItem(1);
+                        return true;
                     case R.id.tab_gank:
-                        switchContent(projectFragment);
-                        break;
+                        mViewPager.setCurrentItem(2);
+                        return true;
                     case R.id.tab_me:
-                        switchContent(meFragment);
-                        break;
+                        mViewPager.setCurrentItem(3);
+                        return true;
                     default:
                         break;
                 }
+                return false;
             }
         });
+
+        /**
+         * 控制不让左右滑动
+         */
+        mViewPager.setScanScroll(false);
     }
 
-    /**
-     * 设置默认的 Fragment
-     * @param fragment
-     */
-    private void setDefaultFragment(Fragment fragment) {
-        fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        ft.add(R.id.contentContainer, fragment).commit();
-        mContent = fragment;
-    }
 
-    /**
-     * 切换fragment的显示隐藏
-     * @param to
-     */
-    private void switchContent(Fragment to) {
-        if (mContent != to) {
-            fm = getSupportFragmentManager();
-            ft = fm.beginTransaction();
-            // 先判断是否被add过
-            if (!to.isAdded()) {
-                // 隐藏当前的fragment，add下一个到Activity中
-                ft.hide(mContent).add(R.id.contentContainer, to).commit();
-            } else {
-                // 隐藏当前的fragment，显示下一个
-                ft.hide(mContent).show(to).commit();
-            }
-            mContent = to;
-        }
+    @Override
+    protected void setStatusBar() {
+        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, null);
     }
 }

@@ -20,14 +20,12 @@ public interface HomeContract {
         void showLoadingView();
         void hideLoadingView();
         void showBanner(ArrayList<String> images, ArrayList<String> urls) ;
-        void showFuncation(ArrayList<String> funcTitles) ;
         void showHomeArticleList(ArrayList<HomeArticleModel> mHomeArticleModels, int totalCount) ;
 
     }
 
     interface Presenter extends BasePresenter {
 
-        ArrayList<String> getFuncData() ;
         void getBannerData(Context context) ;
         void getHomeArticleList(Context context, int page) ;
         void toSearchAc(Context context) ;

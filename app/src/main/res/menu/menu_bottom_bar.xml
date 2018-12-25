@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_home"
+        android:icon="@drawable/bar_home_icon_select"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/tab_welfare"
+        android:icon="@drawable/bar_welfare_icon_select"
+        android:title="@string/welfare"
+        />
+    <item
+        android:id="@+id/tab_gank"
+        android:icon="@drawable/bar_gank_icon_select"
+        android:title="@string/gank" />
+
+    <item
+        android:id="@+id/tab_me"
+        android:icon="@drawable/bar_me_icon_select"
+        android:title="@string/me" />
+</menu>

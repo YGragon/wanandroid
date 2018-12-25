@@ -35,12 +35,6 @@ public class HomeIPresenterCompl implements HomeContract.Presenter {
     }
 
     @Override
-    public ArrayList<String> getFuncData() {
-
-        return mHomeRepository.getFuncData();
-    }
-
-    @Override
     public void getBannerData(Context context) {
         mHomeRepository.getBannerData(context, new HomeDataSource.LoadBannersCallback() {
             @Override
