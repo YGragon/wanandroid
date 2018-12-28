@@ -1,22 +1,15 @@
 package com.dong.wanandroid;
 
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.FrameLayout;
 
 import com.dong.wanandroid.base.BaseActivity;
 import com.dong.wanandroid.home.HomeFragment;
 import com.dong.wanandroid.me.MeFragment;
 import com.dong.wanandroid.project.ProjectFragment;
-import com.dong.wanandroid.weiget.NoScrollHorizontally;
+import com.dong.wanandroid.widget.NoScrollHorizontally;
 import com.dong.wanandroid.welfare.WelfareFragment;
 import com.jaeger.library.StatusBarUtil;
 

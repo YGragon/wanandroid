@@ -1,18 +1,25 @@
 package com.dong.wanandroid.project;
 
 
-import android.graphics.Color;
-import android.support.annotation.ColorInt;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseFragment;
+import com.dong.wanandroid.project.custom_view.CustomView01Activity;
+import com.dong.wanandroid.widget.LinearGradientView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
@@ -29,16 +36,23 @@ public class ProjectFragment extends BaseFragment {
     LinearLayout gankLayout;
     @BindView(R.id.tv_project_toolbar)
     TextView tvProjectToolbar;
+    @BindView(R.id.tv_pie)
+    TextView tvPie;
     @BindView(R.id.nestedScrollView)
     NestedScrollView nestedScrollView;
     @BindView(R.id.fake_status_bar)
     View fakeStatusBar;
     @BindView(R.id.layout_toolbar)
     LinearLayout layoutToolbar;
+    @BindView(R.id.direction1)
+    LinearGradientView linearGradientView1;
+    @BindView(R.id.direction2)
+    LinearGradientView linearGradientView2;
 
     private boolean isShow = true;
 
-    public ProjectFragment() { }
+    public ProjectFragment() {
+    }
 
     @Override
     protected int getContentViewLayoutID() {
@@ -47,8 +61,8 @@ public class ProjectFragment extends BaseFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
-        setTvTitleBackgroundColor(Color.TRANSPARENT);
-
+        linearGradientView1.setDirection(0);
+        linearGradientView2.setDirection(1);
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -57,28 +71,34 @@ public class ProjectFragment extends BaseFragment {
                     isShow = false;
                     // 隐藏
                     layoutToolbar.animate().translationY(-layoutToolbar.getMeasuredHeight());
-                    setTvTitleBackgroundColor(Color.TRANSPARENT);
                 } else if (scrollY - oldScrollY < 0 && !isShow) {
                     isShow = true;
                     // 显示
                     layoutToolbar.animate().translationY(0);
-                    setTvTitleBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 }
             }
         });
     }
-    public void setTvTitleBackgroundColor(@ColorInt int color) {
-        fakeStatusBar.setBackgroundColor(color);
+
+    @Override
+    protected void initData() {
     }
-    @Override
-    protected void initData() { }
 
     @Override
-    protected void onUserVisible() { }
+    protected void onUserVisible() {
+    }
 
     @Override
-    protected void onUserInvisible() { }
+    protected void onUserInvisible() {
+    }
 
     @Override
-    protected void onPreDestroyView() { }
+    protected void onPreDestroyView() {
+    }
+
+
+    @OnClick(R.id.tv_pie)
+    public void onViewClicked() {
+        startActivity(new Intent(getActivity(),CustomView01Activity.class));
+    }
 }
