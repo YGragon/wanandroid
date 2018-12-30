@@ -10,6 +10,14 @@ public class PieData {
     private int color = 0;      // 颜色
     private float angle = 0;    // 角度
 
+    /**
+     *
+     * @param name 名字
+     * @param value 值
+     * @param percentage 百分比
+     * @param color 颜色值
+     * @param angle 角度（不是弧度）
+     */
     public PieData(String name, float value, float percentage, int color, float angle) {
         this.name = name;
         this.value = value;
