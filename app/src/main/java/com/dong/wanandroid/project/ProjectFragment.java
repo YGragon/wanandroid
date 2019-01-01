@@ -2,24 +2,19 @@ package com.dong.wanandroid.project;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.dong.wanandroid.R;
 import com.dong.wanandroid.base.BaseFragment;
 import com.dong.wanandroid.project.custom_view.CustomView01Activity;
+import com.dong.wanandroid.project.custom_view.canvas_operation.CanvasOperationActivity;
 import com.dong.wanandroid.widget.LinearGradientView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 
 /**
@@ -28,16 +23,6 @@ import butterknife.Unbinder;
 public class ProjectFragment extends BaseFragment {
 
 
-    @BindView(R.id.my_collect_layout)
-    LinearLayout myCollectLayout;
-    @BindView(R.id.my_read_record_layout)
-    LinearLayout myReadRecordLayout;
-    @BindView(R.id.gank_layout)
-    LinearLayout gankLayout;
-    @BindView(R.id.tv_project_toolbar)
-    TextView tvProjectToolbar;
-    @BindView(R.id.tv_pie)
-    TextView tvPie;
     @BindView(R.id.nestedScrollView)
     NestedScrollView nestedScrollView;
     @BindView(R.id.fake_status_bar)
@@ -97,8 +82,18 @@ public class ProjectFragment extends BaseFragment {
     }
 
 
-    @OnClick(R.id.tv_pie)
-    public void onViewClicked() {
-        startActivity(new Intent(getActivity(),CustomView01Activity.class));
+    @OnClick({R.id.tv_pie,R.id.tv_canvas})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.tv_pie:
+                startActivity(new Intent(getActivity(),CustomView01Activity.class));
+                break;
+            case R.id.tv_canvas:
+                startActivity(new Intent(getActivity(),CanvasOperationActivity.class));
+                break;
+            default:
+                break;
+        }
+
     }
 }
